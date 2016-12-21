@@ -14,17 +14,7 @@ import java.sql.Statement;
 
 public class TableCreator
 {
-	/**
-	 * TODO
-	 */
-	public TableCreator()
-	{
-		// TODO Auto-generated constructor stub
-	}
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args)
 	{
 		String url = "jdbc:mysql://localhost/cs353_database?useSSL=false";
@@ -96,11 +86,75 @@ public class TableCreator
 		    	stmt.executeUpdate(sql);
 		    }
 		    
+		    resultSet = metadata.getTables( "cs353_database", null, "Ranks", null);
+		    if( resultSet.next())
+		    {
+		    	System.out.println( "`Ranks`");
+		    	sql = "DROP TABLE `Ranks`;";
+		    	stmt.executeUpdate(sql);
+		    }
+		    
+		    resultSet = metadata.getTables( "cs353_database", null, "HostRevs", null);
+		    if( resultSet.next())
+		    {
+		    	System.out.println( "`HostRevs`");
+		    	sql = "DROP TABLE `HostRevs`;";
+		    	stmt.executeUpdate(sql);
+		    }
+		    
 		    resultSet = metadata.getTables( "cs353_database", null, "Account", null);
 		    if( resultSet.next())
 		    {
 		    	System.out.println( "`Account`");
 		    	sql = "DROP TABLE `Account`;";
+		    	stmt.executeUpdate(sql);
+		    }
+		    
+		    resultSet = metadata.getTables( "cs353_database", null, "Address", null);
+		    if( resultSet.next())
+		    {
+		    	System.out.println( "`Address`");
+		    	sql = "DROP TABLE `Address`;";
+		    	stmt.executeUpdate(sql);
+		    }
+		    
+		    resultSet = metadata.getTables( "cs353_database", null, "Contains", null);
+		    if( resultSet.next())
+		    {
+		    	System.out.println( "`Contains`");
+		    	sql = "DROP TABLE `Contains`;";
+		    	stmt.executeUpdate(sql);
+		    }
+		    
+		    resultSet = metadata.getTables( "cs353_database", null, "Amenity", null);
+		    if( resultSet.next())
+		    {
+		    	System.out.println( "`Amenity`");
+		    	sql = "DROP TABLE `Amenity`;";
+		    	stmt.executeUpdate(sql);
+		    }
+		    
+		    resultSet = metadata.getTables( "cs353_database", null, "Room", null);
+		    if( resultSet.next())
+		    {
+		    	System.out.println( "`Room`");
+		    	sql = "DROP TABLE `Room`;";
+		    	stmt.executeUpdate(sql);
+		    }
+		    
+		    resultSet = metadata.getTables( "cs353_database", null, "House", null);
+		    if( resultSet.next())
+		    {
+		    	System.out.println( "`House`");
+		    	sql = "DROP TABLE `House`;";
+		    	stmt.executeUpdate(sql);
+		    }
+		    
+		    resultSet = metadata.getTables( "cs353_database", null, "AccomRevs", null);
+		    if( resultSet.next())
+		    {
+		    	System.out.println( "`AccomRevs`");
+		    	sql = "DROP TABLE `AccomRevs`;";
 		    	stmt.executeUpdate(sql);
 		    }
 		    
@@ -111,11 +165,20 @@ public class TableCreator
 		    	sql = "DROP TABLE `Accommodation`;";
 		    	stmt.executeUpdate(sql);
 		    }
-
+		    
+		    resultSet = metadata.getTables( "cs353_database", null, "Review", null);
+		    if( resultSet.next())
+		    {
+		    	System.out.println( "`Review`");
+		    	sql = "DROP TABLE `Review`;";
+		    	stmt.executeUpdate(sql);
+		    }
+		    
 		    /*
 		     * Create the tables
 		     */
 		    System.out.println( "\nCreating new tables...");
+
 		    // Create `Account` table
 		    sql = "CREATE TABLE `Account`(" +
 		    		"account_ID INT AUTO_INCREMENT PRIMARY KEY," +
@@ -129,11 +192,9 @@ public class TableCreator
 		    
 		    // Create `Credentials` table
 		    sql = "CREATE TABLE `Credentials`(" +
-		    		"c_ID INT AUTO_INCREMENT," +
-		    		"account_ID INT," +
-		    		"username VARCHAR(32) NOT NULL," +
+		    		"account_ID INT PRIMARY KEY," +
+		    		"username VARCHAR(32) NOT NULL UNIQUE," +
 		    		"password VARCHAR(32) NOT NULL," +
-		    		"PRIMARY KEY (c_ID, account_ID)," +
 		    		"FOREIGN KEY (account_ID) REFERENCES Account(account_ID)" +
 		    		") ENGINE = InnoDB;";
 		    stmt.executeUpdate(sql);
@@ -157,15 +218,27 @@ public class TableCreator
 		    stmt.executeUpdate(sql);
 		    System.out.println( "Table `Guest` is created.");
 		    
+		    // Create `Accommodation` table
+		    sql = "CREATE TABLE `Accommodation`(" +
+		    		"accommodation_ID INT AUTO_INCREMENT PRIMARY KEY," +
+		    		"num_of_people INT," +
+		    		"type BIT(1)," +
+		    		"percentageRecommend DECIMAL(4,2)" +
+		    		") ENGINE = InnoDB;";
+		    stmt.executeUpdate(sql);
+		    System.out.println( "Table `Accommodation` is created.");
+		    
 		    // Create `Offering` table
 		    sql = "CREATE TABLE `Offering`(" +
 		    		"offering_ID INT AUTO_INCREMENT PRIMARY KEY," +
 		    		"account_ID INT NOT NULL," +
+		    		"accommodation_ID INT NOT NULL," +
 		    		"start_date DATE," +
 		    		"end_date DATE," +
 		    		"total_num_of_people INT," +
 		    		"price_per_night INT," +
-		    		"FOREIGN KEY (account_ID) REFERENCES Account(account_ID)" +
+		    		"FOREIGN KEY (account_ID) REFERENCES Account(account_ID)," +
+		    		"FOREIGN KEY (accommodation_ID) REFERENCES Accommodation(accommodation_ID)" +
 		    		") ENGINE = InnoDB;";
 		    stmt.executeUpdate(sql);
 		    System.out.println( "Table `Offering` is created.");
@@ -215,240 +288,105 @@ public class TableCreator
 //		    stmt.executeUpdate(sql);
 //		    System.out.println( "Table `Decides` is created.");
 //
-		    // Create `Accommodation` table
-		    sql = "CREATE TABLE `Accommodation`(" +
-		    		"accommodation_ID INT AUTO_INCREMENT PRIMARY KEY," +
-		    		"num_of_people INT," +
-		    		"type BIT(1)," +
+		    // Create `Address` table
+		    sql = "CREATE TABLE `Address`(" +
+		    		"accommodation_ID INT PRIMARY KEY," +
 		    		"street VARCHAR(50)," +
 		    		"district VARCHAR(30)," +
 		    		"city VARCHAR(30)," +
 		    		"country VARCHAR(30)," +
-		    		"percentageRecommend DECIMAL(4,2)" +
+		    		"FOREIGN KEY (accommodation_ID) REFERENCES Accommodation(accommodation_ID)" +
 		    		") ENGINE = InnoDB;";
 		    stmt.executeUpdate(sql);
-		    System.out.println( "Table `Accommodation` is created.");
+		    System.out.println( "Table `Address` is created.");
 
-//		    // Create `guest_show` table
-//		    resultSet = metadata.getTables( "cs353_database", null, "guest_show", null);
-//		    if( resultSet.next())
-//		    {
-//		    	System.out.println( "`guest_show`");
-//		    	sql = "DROP TABLE `guest_show`;";
-//		    	stmt.executeUpdate(sql);
-//		    }
-//		    
-//		    sql = "CREATE TABLE `guest_show`(" +
-//		    		"gid INT," +
-//		    		"sid INT," +
-//		    		"date DATE," +
-//		    		"PRIMARY KEY(gid, sid, date)," +
-//		    		"FOREIGN KEY (gid) REFERENCES guest(gid)," +
-//		    		"FOREIGN KEY (sid) REFERENCES `show`(sid)" +
-//		    		") ENGINE = InnoDB;";
-//		    stmt.executeUpdate(sql);
-//		    System.out.println( "Table `guest_show` is created.");
-//
-//		    // Create `guest_show` table
-//		    resultSet = metadata.getTables( "cs353_database", null, "guest_show", null);
-//		    if( resultSet.next())
-//		    {
-//		    	System.out.println( "`guest_show`");
-//		    	sql = "DROP TABLE `guest_show`;";
-//		    	stmt.executeUpdate(sql);
-//		    }
-//		    
-//		    sql = "CREATE TABLE `guest_show`(" +
-//		    		"gid INT," +
-//		    		"sid INT," +
-//		    		"date DATE," +
-//		    		"PRIMARY KEY(gid, sid, date)," +
-//		    		"FOREIGN KEY (gid) REFERENCES guest(gid)," +
-//		    		"FOREIGN KEY (sid) REFERENCES `show`(sid)" +
-//		    		") ENGINE = InnoDB;";
-//		    stmt.executeUpdate(sql);
-//		    System.out.println( "Table `guest_show` is created.");
-//
-//		    // Create `guest_show` table
-//		    resultSet = metadata.getTables( "cs353_database", null, "guest_show", null);
-//		    if( resultSet.next())
-//		    {
-//		    	System.out.println( "`guest_show`");
-//		    	sql = "DROP TABLE `guest_show`;";
-//		    	stmt.executeUpdate(sql);
-//		    }
-//		    
-//		    sql = "CREATE TABLE `guest_show`(" +
-//		    		"gid INT," +
-//		    		"sid INT," +
-//		    		"date DATE," +
-//		    		"PRIMARY KEY(gid, sid, date)," +
-//		    		"FOREIGN KEY (gid) REFERENCES guest(gid)," +
-//		    		"FOREIGN KEY (sid) REFERENCES `show`(sid)" +
-//		    		") ENGINE = InnoDB;";
-//		    stmt.executeUpdate(sql);
-//		    System.out.println( "Table `guest_show` is created.");
-//
-//		    // Create `guest_show` table
-//		    resultSet = metadata.getTables( "cs353_database", null, "guest_show", null);
-//		    if( resultSet.next())
-//		    {
-//		    	System.out.println( "`guest_show`");
-//		    	sql = "DROP TABLE `guest_show`;";
-//		    	stmt.executeUpdate(sql);
-//		    }
-//		    
-//		    sql = "CREATE TABLE `guest_show`(" +
-//		    		"gid INT," +
-//		    		"sid INT," +
-//		    		"date DATE," +
-//		    		"PRIMARY KEY(gid, sid, date)," +
-//		    		"FOREIGN KEY (gid) REFERENCES guest(gid)," +
-//		    		"FOREIGN KEY (sid) REFERENCES `show`(sid)" +
-//		    		") ENGINE = InnoDB;";
-//		    stmt.executeUpdate(sql);
-//		    System.out.println( "Table `guest_show` is created.");
-//
-//		    // Create `guest_show` table
-//		    resultSet = metadata.getTables( "cs353_database", null, "guest_show", null);
-//		    if( resultSet.next())
-//		    {
-//		    	System.out.println( "`guest_show`");
-//		    	sql = "DROP TABLE `guest_show`;";
-//		    	stmt.executeUpdate(sql);
-//		    }
-//		    
-//		    sql = "CREATE TABLE `guest_show`(" +
-//		    		"gid INT," +
-//		    		"sid INT," +
-//		    		"date DATE," +
-//		    		"PRIMARY KEY(gid, sid, date)," +
-//		    		"FOREIGN KEY (gid) REFERENCES guest(gid)," +
-//		    		"FOREIGN KEY (sid) REFERENCES `show`(sid)" +
-//		    		") ENGINE = InnoDB;";
-//		    stmt.executeUpdate(sql);
-//		    System.out.println( "Table `guest_show` is created.");
-//
-//		    // Create `guest_show` table
-//		    resultSet = metadata.getTables( "cs353_database", null, "guest_show", null);
-//		    if( resultSet.next())
-//		    {
-//		    	System.out.println( "`guest_show`");
-//		    	sql = "DROP TABLE `guest_show`;";
-//		    	stmt.executeUpdate(sql);
-//		    }
-//		    
-//		    sql = "CREATE TABLE `guest_show`(" +
-//		    		"gid INT," +
-//		    		"sid INT," +
-//		    		"date DATE," +
-//		    		"PRIMARY KEY(gid, sid, date)," +
-//		    		"FOREIGN KEY (gid) REFERENCES guest(gid)," +
-//		    		"FOREIGN KEY (sid) REFERENCES `show`(sid)" +
-//		    		") ENGINE = InnoDB;";
-//		    stmt.executeUpdate(sql);
-//		    System.out.println( "Table `guest_show` is created.");
-//
-//		    System.out.println( "All tables are created succesfully!");
-//		    
-//		    /* 
-//			 * Insert records into the tables
-//			 */
-//			System.out.println( "\nInserting values into the tables...");
-//			
-//			// To `host`
-//			sql = "INSERT INTO host VALUES (1,'Fatih Altayli', 'altayli', '1111', 'Mr.', 'journalist');";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO host VALUES (2,'Cuneyt Ozdemir', 'ozdemir', '2222', 'Mr.', 'journalist');";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO host VALUES (3,'Neil deGrasse Tyson', 'tyson', '3333', 'Dr.', 'astrophysicist');";
-//			stmt.executeUpdate(sql);
-//
-//			// To `channel`
-//			sql = "INSERT INTO channel VALUES (1, 'National Geographic');";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO channel VALUES (2, 'CNN TURK');";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO channel VALUES (3, 'Haberturk');";
-//			stmt.executeUpdate(sql);
-//			
-//			// To `show`
-//			sql = "INSERT INTO `show` VALUES (1, 'Teke tek', '23:00:00', 'Tuesday', 1, 3);";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO `show` VALUES (2, '5N1K', '22:00:00', 'Sunday', 2, 2);";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO `show` VALUES (3, 'Startalk', '22:00:00', 'Monday', 3, 1);";
-//			stmt.executeUpdate(sql);
-//			
-//			// To `guest`
-//			sql = "INSERT INTO guest VALUES (5, 'Celal Sengor', 'Prof. Dr.', 'geologist', 'Professor Sengor is a (foreign) member of The American Philosophical Society, The United States National Academy of Sciences and The Russian Academy of Sciences. Actually, he is the second Turkish prominent professor who is elected as a member by the Russian Academy of Sciences after Professor ordinarius Mehmet Fuat Koprulu.');";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO guest VALUES (6, 'Ilber Ortayli', 'Prof. Dr.', 'historian', 'Ilber Ortayli is heir to a bilingual Turkish family so that he obtained German from his father and Russian from his mother. As a polyglot historian he has enough competency in Italian, English, French, Persian and also in Ottoman Turkish and Latin in order to fluently employ or maintain historical research with historical documents in the archives. His published articles are mainly in Turkish, German and French and various of them are translated in English.');";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO guest VALUES (7, 'Mayim Bialik', 'Mrs.', 'actress', 'Mayim Chaya Bialik is an American actress and neuroscientist. From 1991 to 1995, she played  the title character of NBCs Blossom. Since 2010, she has played Dr. Amy Farrah Fowler - like the actress, a neuroscientist - on CBSs The Big Bang Theory.');";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO guest VALUES (8, 'Orhan Pamuk', 'Mr.', 'novelist', 'Orhan Pamuk is a Turkish novelist,screenwriter, academic and recipient of the 2006 Nobel Prize in Literature. One of Turkeys most prominent novelists, his work has sold over thirteen million books in sixty-three languages, making him the countrys bestselling writer.');";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO guest VALUES (9, 'Fazil Say', 'Mr.', 'pianist', 'Fazil Say is a virtuoso Turkish pianist and composer who was born in Ankara, described recently as \"not merely a pianist of genius; but undoubtedly he will be one of the great artists of the twenty-first century\".');";
-//			stmt.executeUpdate(sql);
-//			
-//			// To `guest_show`
-//			sql = "INSERT INTO guest_show VALUES (5, 1, '2016-11-22');";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO guest_show VALUES (6, 1, '2016-11-22');";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO guest_show VALUES (7, 3, '2016-11-21');";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO guest_show VALUES (8, 2, '2016-11-27');";
-//			stmt.executeUpdate(sql);
-//			sql = "INSERT INTO guest_show VALUES (9, 2, '2016-11-27');";
-//			stmt.executeUpdate(sql);
-//			
-//			System.out.println( "Insertions are completed sucessfully!");
-//			
-//			/*
-//			 * Print resultant tables
-//			 */
-//			System.out.println("\nPrinting resultant tables...");
-//			
-//			System.out.println("Table `host`:");
-//			sql = "SELECT * FROM host;";
-//			resultSet = stmt.executeQuery(sql);
-//			while( resultSet.next())
-//				System.out.println( resultSet.getInt("hid") + " | " + resultSet.getString("name") + " | " + resultSet.getString("nickname") + " | " +
-//									resultSet.getString("password") + " | " + resultSet.getString("title") + " | " + resultSet.getString("proffesion"));
-//			
-//			System.out.println("\nTable `channel`:");
-//			sql = "SELECT * FROM channel;";
-//			resultSet = stmt.executeQuery(sql);
-//			while( resultSet.next())
-//				System.out.println( resultSet.getInt("cid") + " | " + resultSet.getString("cname"));
-//			
-//			System.out.println("\nTable `show`:");
-//			sql = "SELECT * FROM `show`;";
-//			resultSet = stmt.executeQuery(sql);
-//			while( resultSet.next())
-//				System.out.println( resultSet.getInt("sid") + " | " + resultSet.getString("pname") + " | " + resultSet.getTime("time")+ " | " +
-//									resultSet.getString("day") + " | " + resultSet.getInt("hid") + " | " + resultSet.getInt("cid"));
-//			
-//			System.out.println("\nTable `guest`:");
-//			sql = "SELECT * FROM guest;";
-//			resultSet = stmt.executeQuery(sql);
-//			while( resultSet.next())
-//				System.out.println( resultSet.getInt("gid") + " | " + resultSet.getString("gname") + " | " + resultSet.getString("title") + " | " +
-//									resultSet.getString("proffesion") + " | " + resultSet.getString("short_bio"));
-//			
-//			System.out.println("\nTable `guest_show`:");
-//			sql = "SELECT * FROM guest_show;";
-//			resultSet = stmt.executeQuery(sql);
-//			while( resultSet.next())
-//				System.out.println( resultSet.getInt("gid") + " | " + resultSet.getInt("sid") + " | " + resultSet.getString("date"));
-//			
+		    // Create `Amenity` table
+		    sql = "CREATE TABLE `Amenity`(" +
+		    		"amenity_ID INT AUTO_INCREMENT PRIMARY KEY," +
+		    		"amenity_name VARCHAR(30)" +
+		    		") ENGINE = InnoDB;";
+		    stmt.executeUpdate(sql);
+		    System.out.println( "Table `Amenity` is created.");
+
+		    // Create `Contains` table
+		    sql = "CREATE TABLE `Contains`(" +
+		    		"amenity_ID INT," +
+		    		"accommodation_ID INT NOT NULL," +
+		    		"PRIMARY KEY (amenity_ID, accommodation_ID)," +
+		    		"FOREIGN KEY (amenity_ID) REFERENCES Amenity(amenity_ID)," +
+		    		"FOREIGN KEY (accommodation_ID) REFERENCES Accommodation(accommodation_ID)" +
+		    		") ENGINE = InnoDB;";
+		    stmt.executeUpdate(sql);
+		    System.out.println( "Table `Contains` is created.");
+
+		    // Create `Room` table
+		    sql = "CREATE TABLE `Room`(" +
+		    		"accommodation_ID INT PRIMARY KEY," +
+		    		"num_of_beds INT," +
+		    		"FOREIGN KEY (accommodation_ID) REFERENCES Accommodation(accommodation_ID)" +
+		    		") ENGINE = InnoDB;";
+		    stmt.executeUpdate(sql);
+		    System.out.println( "Table `Room` is created.");
+
+		    // Create `House` table
+		    sql = "CREATE TABLE `House`(" +
+		    		"accommodation_ID INT PRIMARY KEY," +
+		    		"num_of_rooms INT," +
+		    		"num_of_wc INT," +
+		    		"FOREIGN KEY (accommodation_ID) REFERENCES Accommodation(accommodation_ID)" +
+		    		") ENGINE = InnoDB;";
+		    stmt.executeUpdate(sql);
+		    System.out.println( "Table `House` is created.");
+		    
+		    // Create `Review` table
+		    sql = "CREATE TABLE `Review`(" +
+		    		"review_ID INT AUTO_INCREMENT PRIMARY KEY," +
+		    		"rating DECIMAL(2,1) NOT NULL," +
+		    		"comment VARCHAR(300)," +
+		    		"recommended BIT(1)," +
+		    		"date DATETIME" +
+		    		") ENGINE = InnoDB;";
+		    stmt.executeUpdate(sql);
+		    System.out.println( "Table `Review` is created.");
+		    
+		    // Create `AccomRevs` table
+		    sql = "CREATE TABLE `AccomRevs`(" +
+		    		"review_ID INT PRIMARY KEY," +
+		    		"accommodation_ID INT NOT NULL," +
+		    		"FOREIGN KEY (review_ID) REFERENCES Review(review_ID)," +
+		    		"FOREIGN KEY (accommodation_ID) REFERENCES Accommodation(accommodation_ID)" +
+		    		") ENGINE = InnoDB;";
+		    stmt.executeUpdate(sql);
+		    System.out.println( "Table `AccomRevs` is created.");
+		    
+		    // Create `Ranks` table
+		    sql = "CREATE TABLE `Ranks`(" +
+		    		"review_ID INT PRIMARY KEY," +
+		    		"account_ID INT NOT NULL," +
+		    		"FOREIGN KEY (account_ID) REFERENCES Account(account_ID)" +
+		    		") ENGINE = InnoDB;";
+		    stmt.executeUpdate(sql);
+		    System.out.println( "Table `Ranks` is created.");
+		    
+		    // Create `HostRevs` table
+		    sql = "CREATE TABLE `HostRevs`(" +
+		    		"host_ID INT," +
+		    		"guest_ID INT," +
+		    		"rating DECIMAL(2,1) NOT NULL," +
+		    		"comment VARCHAR(300)," +
+		    		"date DATETIME," +
+		    		"PRIMARY KEY(host_ID, guest_ID)," +
+		    		"FOREIGN KEY (host_ID) REFERENCES Accommodation(accommodation_ID)," +
+		    		"FOREIGN KEY (guest_ID) REFERENCES Accommodation(accommodation_ID)" +
+		    		") ENGINE = InnoDB;";
+		    stmt.executeUpdate(sql);
+		    System.out.println( "Table `HostRevs` is created.");
+		    
+		    System.out.println( "All tables are created succesfully!");
 			System.out.println("\nAu revoir..");
 			
 		} catch (SQLException e) {
-//				    throw new IllegalStateException("Cannot connect to the database!", e);
-			e.printStackTrace();
+		    throw new IllegalStateException( e.getMessage(), e);
 		}
 	}
 }
