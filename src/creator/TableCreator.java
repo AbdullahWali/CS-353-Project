@@ -69,7 +69,15 @@ public class TableCreator
 		    	sql = "DROP TABLE `Makes`;";
 		    	stmt.executeUpdate(sql);
 		    }
-		    
+
+			resultSet = metadata.getTables( "cs353_database", null, "Decides", null);
+			if( resultSet.next())
+			{
+				System.out.println( "`Decides`");
+				sql = "DROP TABLE `Decides`;";
+				stmt.executeUpdate(sql);
+			}
+
 		    resultSet = metadata.getTables( "cs353_database", null, "Reservation", null);
 		    if( resultSet.next())
 		    {
@@ -264,29 +272,16 @@ public class TableCreator
 		    stmt.executeUpdate(sql);
 		    System.out.println( "Table `Makes` is created.");
 
-		    /* 
-		     * !!! `Decides`: TO BE IMPLEMENTED !!!
-		     */
 		    
-//		    // Create `Decides` table
-//		    resultSet = metadata.getTables( "cs353_database", null, "Decides", null);
-//		    if( resultSet.next())
-//		    {
-//		    	System.out.println( "`Decides`");
-//		    	sql = "DROP TABLE `Decides`;";
-//		    	stmt.executeUpdate(sql);
-//		    }
-//		    
-//		    sql = "CREATE TABLE `Decides`(" +
-//		    		"gid INT," +
-//		    		"sid INT," +
-//		    		"date DATE," +
-//		    		"PRIMARY KEY(gid, sid, date)," +
-//		    		"FOREIGN KEY (gid) REFERENCES guest(gid)," +
-//		    		"FOREIGN KEY (sid) REFERENCES `show`(sid)" +
-//		    		") ENGINE = InnoDB;";
-//		    stmt.executeUpdate(sql);
-//		    System.out.println( "Table `Decides` is created.");
+		    // Create `Decides` table
+		    sql = "CREATE TABLE `Decides`(" +
+		    		"reservation_ID INT ," +
+		    		"account_ID INT," +
+		    		"STATUS boolean," +
+		    		"FOREIGN KEY (reservation_ID) REFERENCES Reservation(reservation_ID)" +
+					"FOREIGN KEY (account_ID) REFERENCES Account(account_ID))ENGINE = InnoDB;";
+		    stmt.executeUpdate(sql);
+		    System.out.println( "Table `Decides` is created.");
 //
 		    // Create `Address` table
 		    sql = "CREATE TABLE `Address`(" +

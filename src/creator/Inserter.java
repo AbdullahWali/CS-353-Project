@@ -150,13 +150,31 @@ public class Inserter
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Offering` VALUES (10, 3, 3, '2017-02-18', '2017-02-24', 10, 1399);";
 			stmt.executeUpdate(sql);
-			
-//			// To `guest_show`
-//			sql = "INSERT INTO guest_show VALUES (5, 1, '2016-11-22');";
-//			stmt.executeUpdate(sql);
-			
+
+			//To Reservation
+			sql = "INSERT INTO `Reservation` VALUES(1, '2017-03-10', '2017-03-18' );";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Reservation` VALUES(2, '2017-03-11', '2017-03-20' );";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Reservation` VALUES(3, '2017-02-15', '2017-03-07' );";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Reservation` VALUES(4, '2017-04-10', '2017-05-01' );";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Reservation` VALUES(5, '2017-6-10', '2017-05-25' );";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Reservation` VALUES(6, '2017-11-10', '2017-12-25' );";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Reservation` VALUES(7, '2017-05-12', '2017-07-01' );";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Reservation` VALUES(7, '2017-06-06', '2017-08-01' );";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Reservation` VALUES(7, '2016-12-10', '2016-12-25' );";
+			stmt.executeUpdate(sql);
+
+
+
 			System.out.println( "Insertions are completed sucessfully!");
-			System.out.println( "\nÀ bientôt..");
+			System.out.println( "\nÀ bientôt.."); // Bu ne demek yaa?
 			
 		} catch(SQLException e) {
 			throw new IllegalStateException( e.getMessage(), e);
