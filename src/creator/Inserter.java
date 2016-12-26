@@ -17,7 +17,7 @@ public class Inserter
 	{
 		String url = "jdbc:mysql://localhost/cs353_database?useSSL=false";
 		String username = "root";
-		String password = "";
+		String password = "root";
 
 		System.out.println("Connecting to the database...");
 		
@@ -47,9 +47,9 @@ public class Inserter
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Account` VALUES (7, 'Nihat', 'Ozkul', 'ozkul@gmail.com', '+903125874566');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Account` VALUES (8, 'Burcin', 'Terzioglu', 'ozkul@gmail.com', '+903125874566');";
+			sql = "INSERT INTO `Account` VALUES (8, 'Burcin', 'Terzioglu', 'terzioglu@gmail.com', '+903125874566');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Account` VALUES (9, 'Ilker', 'Kaleli', 'ozkul@gmail.com', '+903125874566');";
+			sql = "INSERT INTO `Account` VALUES (9, 'Ilker', 'Kaleli', 'kaleli@gmail.com', '+903125874566');";
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Account` VALUES (10, 'Ercument', 'Cicek', 'cicek@bilkent.edu.tr', '+905354781100');";
 			stmt.executeUpdate(sql);
@@ -206,7 +206,7 @@ public class Inserter
 
 
             System.out.println( "Insertions are completed sucessfully!");
-			System.out.println( "\nÀ bientôt.."); // Bu ne demek yaa?
+			System.out.println( "\nÀ bientôt.."); // Bu ne demek yaa? (Good bye in French.. :)
 			
 		} catch(SQLException e) {
 			throw new IllegalStateException( e.getMessage(), e);
