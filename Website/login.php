@@ -16,21 +16,9 @@ if( isset($_POST['btn-login']) ) {
  $email = trim($_POST['email']);
  $password = trim($_POST['password']);
 
- echo "<br><br><br>";
-	  // clear invalid inputs
- if(empty($email)){
+// clear invalid inputs
+if (empty($password) or empty($email)){
     $error = true;
-    $emailError = "The email..write it.";
-} 
-
-if(empty($password)){
-    $error = true;
-    $passError = "I don't think I should let you in without a password";
-}
-
-if (empty($password) and empty($email)){
-    $error = true;
-    $nonError= "Do those rectangular boxes down there mean anything to you? :)";
 }
 	  // if there's no error, continue to login
 if (!$error) {
@@ -42,7 +30,6 @@ if (!$error) {
         $_SESSION['user'] = $row['account_ID'];
         header("Location: http://google.com");
     } else {
-        echo "Not logged in";
         $errMSG = "Incorrect Credentials, Try again...";
     }
 }
@@ -64,7 +51,7 @@ if (!$error) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 </head>
-<body>
+<body style="padding-top: 65px;">
    <!-- Fixed navbar -->
    <nav class="navbar navbar-inverse navbar-fixed-top">
        <div class="container">
@@ -90,7 +77,6 @@ if (!$error) {
  </div>
 </div>
 </nav>
-<br><br><br>
 
 
 
@@ -98,16 +84,16 @@ if (!$error) {
 <!--Log in Form-->
 <div class="container col-md-4 col-md-offset-5">
     <div class = "row">
-        <h2 ><strong> Already a User?</strong></h2><br>
+        <h2 style="margin-left:25px;"><strong> Already a User?</strong></h2><br>
         <div class="container col-md-6">
             <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
                 <div class="form-group">
                     <label class="sr-only" for="email">Email address</label>
-                    <input type="email" class="form-control" name = "email" id="email" placeholder="Enter email">
+                    <input type="email" class="form-control" name = "email" id="email" placeholder="Email" required="true">
                 </div>
                 <div class="form-group">
                     <label class="sr-only" for="password">Password</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="true">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary center-block" name="btn-login">Sign in</button>
@@ -132,45 +118,14 @@ if (!$error) {
         <?php
     }
     ?>
-
-    <?php
-    if ( isset($nonError) ) {
-
-        ?>
-        <div class="form-group">
-           <div class="alert alert-danger">
-            <span class="glyphicon glyphicon-info-sign"></span> <?php echo $nonError; ?>
-        </div>
-    </div>
-    <?php
-}  else if ( isset($emailError) ) {
- ?>
-
- <div class="form-group">
-   <div class="alert alert-danger">
-    <span class="glyphicon glyphicon-info-sign"></span> <?php echo $emailError; ?>
-</div>
-</div>
-<?php
-} else if ( isset($passError) ) {
- ?>
-
- <div class="form-group">
-   <div class="alert alert-danger">
-    <span class="glyphicon glyphicon-info-sign"></span> <?php echo $passError; ?>
-    </div>
-</div>
-<?php
-}
-?>
 </div>
 </div>
 
 <div class = "row">
     <!--sign up-->
-    <h2><strong>Yeni misin :)?</strong></h2><br>
+    <h2 style="margin-left:40px;"><strong>Yeni misin :)?</strong></h2><br>
     <div class="container col-md-6">
-        <button class="btn btn-primary center-block" onclick="window.location.href = 'http://google.com' ">Sign up</button>
+        <button class="btn btn-primary center-block" onclick="window.location.href = 'signup.php' ">Sign up</button>
     </div>
 </div>
 </div>
