@@ -17,7 +17,7 @@ public class TableCreator
 
 	public static void main(String[] args)
 	{
-		String url = "jdbc:mysql://localhost/cs353_database?useSSL=false";
+		String url = "jdbc:mysql://localhost/cs353_database";
 		String username = "root";
 		String password = "root";
 
@@ -201,7 +201,6 @@ public class TableCreator
 		    // Create `Credentials` table
 		    sql = "CREATE TABLE `Credentials`(" +
 		    		"account_ID INT PRIMARY KEY," +
-		    		"username VARCHAR(32) NOT NULL UNIQUE," +
 		    		"password VARCHAR(32) NOT NULL," +
 		    		"FOREIGN KEY (account_ID) REFERENCES Account(account_ID)" +
 		    		") ENGINE = InnoDB;";
@@ -210,7 +209,7 @@ public class TableCreator
 		    
 		    // Create `Host` table
 		    sql = "CREATE TABLE `Host`(" +
-		    		"account_ID INT AUTO_INCREMENT PRIMARY KEY," +
+		    		"account_ID INT PRIMARY KEY," +
 		    		"avg_host_rank NUMERIC(3,2)," +
 		    		"FOREIGN KEY (account_ID) REFERENCES Account(account_ID)" +
 		    		") ENGINE = InnoDB;";
@@ -219,7 +218,7 @@ public class TableCreator
 		    
 		    // Create `Guest` table
 		    sql = "CREATE TABLE `Guest`(" +
-		    		"account_ID INT AUTO_INCREMENT PRIMARY KEY," +
+		    		"account_ID INT  PRIMARY KEY," +
 		    		"avg_guest_rank NUMERIC(3,2)," +
 		    		"FOREIGN KEY (account_ID) REFERENCES Account(account_ID)" +
 		    		") ENGINE = InnoDB;";
@@ -262,7 +261,7 @@ public class TableCreator
 
 		    // Create `Makes` table
 		    sql = "CREATE TABLE `Makes`(" +
-		    		"reservation_ID INT AUTO_INCREMENT PRIMARY KEY," +
+		    		"reservation_ID INT  PRIMARY KEY," +
 		    		"account_ID INT NOT NULL," +
 		    		"offering_ID INT NOT NULL," +
 		    		"FOREIGN KEY (reservation_ID) REFERENCES Reservation(reservation_ID)," +
@@ -278,7 +277,7 @@ public class TableCreator
 		    		"reservation_ID INT ," +
 		    		"account_ID INT," +
 		    		"STATUS boolean," +
-		    		"FOREIGN KEY (reservation_ID) REFERENCES Reservation(reservation_ID)" +
+		    		"FOREIGN KEY (reservation_ID) REFERENCES Reservation(reservation_ID)," +
 					"FOREIGN KEY (account_ID) REFERENCES Account(account_ID))ENGINE = InnoDB;";
 		    stmt.executeUpdate(sql);
 		    System.out.println( "Table `Decides` is created.");

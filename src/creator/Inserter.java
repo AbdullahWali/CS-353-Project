@@ -17,7 +17,7 @@ public class Inserter
 	{
 		String url = "jdbc:mysql://localhost/cs353_database?useSSL=false";
 		String username = "root";
-		String password = "root";
+		String password = "";
 
 		System.out.println("Connecting to the database...");
 		
@@ -55,25 +55,25 @@ public class Inserter
 			stmt.executeUpdate(sql);
 
 			// To `Credentials`
-			sql = "INSERT INTO `Credentials` VALUES (1, 'john', 'john123');";
+			sql = "INSERT INTO `Credentials` VALUES (1, 'john123');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Credentials` VALUES (2, 'fatih', 'fatih123');";
+			sql = "INSERT INTO `Credentials` VALUES (2, 'fatih123');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Credentials` VALUES (3, 'albert', 'albert123');";
+			sql = "INSERT INTO `Credentials` VALUES (3, 'albert123');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Credentials` VALUES (4, 'hans', 'hans123');";
+			sql = "INSERT INTO `Credentials` VALUES (4, 'hans123');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Credentials` VALUES (5, 'mike', 'mike123');";
+			sql = "INSERT INTO `Credentials` VALUES (5, 'mike123');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Credentials` VALUES (6, 'janke', 'janke123');";
+			sql = "INSERT INTO `Credentials` VALUES (6, 'janke123');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Credentials` VALUES (7, 'nihat', 'nihat123');";
+			sql = "INSERT INTO `Credentials` VALUES (7, 'nihat123');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Credentials` VALUES (8, 'burcin', 'burcin123');";
+			sql = "INSERT INTO `Credentials` VALUES (8,  'burcin123');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Credentials` VALUES (9, 'ilker', 'ilker123');";
+			sql = "INSERT INTO `Credentials` VALUES (9,  'ilker123');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Credentials` VALUES (10, 'ercument', 'ercument123');";
+			sql = "INSERT INTO `Credentials` VALUES (10, 'ercument123');";
 			stmt.executeUpdate(sql);
 			
 			// To `Host`
@@ -166,14 +166,46 @@ public class Inserter
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Reservation` VALUES(7, '2017-05-12', '2017-07-01' );";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Reservation` VALUES(7, '2017-06-06', '2017-08-01' );";
-			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Reservation` VALUES(7, '2016-12-10', '2016-12-25' );";
+			sql = "INSERT INTO `Reservation` VALUES(8, '2017-06-06', '2017-08-01' );";
 			stmt.executeUpdate(sql);
 
+            //To Makes
+            sql = "INSERT INTO `Makes` VALUES (4, 1, 6);";
+            stmt.executeUpdate(sql);
+            sql = "INSERT INTO `Makes` VALUES (2, 3, 5);";
+            stmt.executeUpdate(sql);
+            sql = "INSERT INTO `Makes` VALUES (1, 4, 3);";
+            stmt.executeUpdate(sql);
+            sql = "INSERT INTO `Makes` VALUES (8, 5, 4);";
+            stmt.executeUpdate(sql);
+            sql = "INSERT INTO `Makes` VALUES (3, 6, 8);";
+            stmt.executeUpdate(sql);
+            sql = "INSERT INTO `Makes` VALUES (5, 7, 1);";
+            stmt.executeUpdate(sql);
+            sql = "INSERT INTO `Makes` VALUES (6, 7, 2);";
+            stmt.executeUpdate(sql);
 
 
-			System.out.println( "Insertions are completed sucessfully!");
+            //Decides
+            sql = "INSERT INTO `Decides` VALUES (1, 4, true);";
+            stmt.executeUpdate(sql);
+            sql = "INSERT INTO `Decides` VALUES (2, 7, true);";
+            stmt.executeUpdate(sql);
+            sql = "INSERT INTO `Decides` VALUES (3, 2, false);";
+            stmt.executeUpdate(sql);
+            sql = "INSERT INTO `Decides` VALUES (4, 6, false);";
+            stmt.executeUpdate(sql);
+            sql = "INSERT INTO `Decides` VALUES (5, 4, false);";
+            stmt.executeUpdate(sql);
+            sql = "INSERT INTO `Decides` VALUES (6, 5, true);";
+            stmt.executeUpdate(sql);
+
+
+
+
+
+
+            System.out.println( "Insertions are completed sucessfully!");
 			System.out.println( "\nÀ bientôt.."); // Bu ne demek yaa?
 			
 		} catch(SQLException e) {
