@@ -274,7 +274,7 @@ public class TableCreator
 		    
 		    // Create `Decides` table
 		    sql = "CREATE TABLE `Decides`(" +
-		    		"reservation_ID INT ," +
+		    		"reservation_ID INT PRIMARY KEY," +
 		    		"account_ID INT," +
 		    		"STATUS boolean," +
 		    		"FOREIGN KEY (reservation_ID) REFERENCES Reservation(reservation_ID)," +
