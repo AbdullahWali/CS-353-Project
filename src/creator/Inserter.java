@@ -17,7 +17,7 @@ public class Inserter
 	{
 		String url = "jdbc:mysql://localhost/cs353_database?useSSL=false";
 		String username = "root";
-		String password = "";
+		String password = "root";
 
 		System.out.println("Connecting to the database...");
 		
