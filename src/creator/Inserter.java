@@ -206,7 +206,7 @@ public class Inserter
 
 
             System.out.println( "Insertions are completed sucessfully!");
-			System.out.println( "\nÀ bientôt.."); // Bu ne demek yaa? (Good bye in French.. :)
+			System.out.println( "\nÀ bientôt.."); // Bu ne demek yaa? (See you soon in French.. :)
 			
 		} catch(SQLException e) {
 			throw new IllegalStateException( e.getMessage(), e);
