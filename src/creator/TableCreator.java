@@ -19,7 +19,7 @@ public class TableCreator
 	{
 		String url = "jdbc:mysql://localhost/cs353_database";
 		String username = "root";
-		String password = "root";
+		String password = "";
 
 		System.out.println("Connecting to the database...");
 
