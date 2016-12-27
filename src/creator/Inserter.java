@@ -17,7 +17,7 @@ public class Inserter
 	{
 		String url = "jdbc:mysql://localhost/cs353_database?useSSL=false";
 		String username = "root";
-		String password = "root";
+		String password = "";
 
 		System.out.println("Connecting to the database...");
 		
@@ -45,11 +45,11 @@ public class Inserter
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Account` VALUES (6, 'Janke', 'Rademaker', 'j.rademaker@zth.nl', '+89514632021');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Account` VALUES (7, 'Nihat', 'Ozkul', 'ozkul@gmail.com', '+903125874566');";
+			sql = "INSERT INTO `Account` VALUES (7, 'Nihat', 'Ozkul', 'nihat@gmail.com', '+903125874566');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Account` VALUES (8, 'Burcin', 'Terzioglu', 'terzioglu@gmail.com', '+903125874566');";
+			sql = "INSERT INTO `Account` VALUES (8, 'Burcin', 'Terzioglu', 'ozkul@gmail.com', '+903125874566');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Account` VALUES (9, 'Ilker', 'Kaleli', 'kaleli@gmail.com', '+903125874566');";
+			sql = "INSERT INTO `Account` VALUES (9, 'Ilker', 'Kaleli', 'ILKER@gmail.com', '+903125874566');";
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Account` VALUES (10, 'Ercument', 'Cicek', 'cicek@bilkent.edu.tr', '+905354781100');";
 			stmt.executeUpdate(sql);
@@ -152,21 +152,21 @@ public class Inserter
 			stmt.executeUpdate(sql);
 
 			//To Reservation
-			sql = "INSERT INTO `Reservation` VALUES(1, '2017-03-10', '2017-03-18' );";
+			sql = "INSERT INTO `Reservation` VALUES(1, '2016-10-10', '2016-10-12' );";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Reservation` VALUES(2, '2017-03-11', '2017-03-20' );";
+			sql = "INSERT INTO `Reservation` VALUES(2, '2016-09-20', '2016-09-27' );";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Reservation` VALUES(3, '2017-02-15', '2017-03-07' );";
+			sql = "INSERT INTO `Reservation` VALUES(3, '2017-01-06', '2017-01-08' );";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Reservation` VALUES(4, '2017-04-10', '2017-05-01' );";
+			sql = "INSERT INTO `Reservation` VALUES(4, '2017-07-10', '2017-07-08' );";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Reservation` VALUES(5, '2017-6-10', '2017-05-25' );";
+			sql = "INSERT INTO `Reservation` VALUES(5,'2016-12-22', '2016-12-24' );";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Reservation` VALUES(6, '2017-11-10', '2017-12-25' );";
+			sql = "INSERT INTO `Reservation` VALUES(6, '2017-01-20', '2017-01-30' );";
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Reservation` VALUES(7, '2017-05-12', '2017-07-01' );";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Reservation` VALUES(8, '2017-06-06', '2017-08-01' );";
+			sql = "INSERT INTO `Reservation` VALUES(8, '2016-02-24', '2016-02-25' );";
 			stmt.executeUpdate(sql);
 
             //To Makes
@@ -206,7 +206,7 @@ public class Inserter
 
 
             System.out.println( "Insertions are completed sucessfully!");
-			System.out.println( "\nÀ bientôt.."); // Bu ne demek yaa? (Good bye in French.. :)
+			System.out.println( "\nÀ bientôt.."); // Bu ne demek yaa?
 			
 		} catch(SQLException e) {
 			throw new IllegalStateException( e.getMessage(), e);
