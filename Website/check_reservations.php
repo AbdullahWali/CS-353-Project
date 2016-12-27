@@ -9,7 +9,7 @@
 	// check validity of the credentials
 	$sql = 'SELECT email FROM Account WHERE account_ID = ' .$accountID. ';';
 	$result = mysqli_query($db, $sql);
-    $row = mysqli_fetch_array($result);
+	$row = mysqli_fetch_array($result);
 	$count = mysqli_num_rows($result);
 	if( $count != 1)
 	{
