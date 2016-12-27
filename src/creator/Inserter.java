@@ -129,6 +129,28 @@ public class Inserter
 			sql = "INSERT INTO `Accommodation` VALUES (10, 4, 1, 74.82);";
 			stmt.executeUpdate(sql);
 			
+			// To `Address`
+			sql = "INSERT INTO `Address` VALUES (1, '2000. Street', 'Bellevue', 'New York', 'USA');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (2, '49. Street', 'Lichtenberg', 'Berlin', 'Germany');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (3, '201. Street', 'Saint Germain', 'Paris', 'France');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (4, '30. Street', 'West End', 'London', 'UK');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (5, '1029. Street', 'Nordstrand', 'Oslo', 'Norway');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (6, '304. Street', 'Oost', 'Amsterdam', 'Netherlands');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (7, '850. Street', 'Amarante', 'Porto', 'Portugal');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (8, '703. Street', 'Nou Barris', 'Barcelona', 'Spain');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (9, '283. Street', 'Monteverde', 'Rome', 'Italy');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (10, '398. Street', 'Taksim', 'Istanbul', 'Turkey')";
+			stmt.executeUpdate(sql);
+			
 			// To `Offering`
 			sql = "INSERT INTO `Offering` VALUES (1, 4, 6, '2016-12-22', '2016-12-25', 12, 30);";
 			stmt.executeUpdate(sql);
