@@ -54,74 +54,71 @@ ob_start();
 </div>
 </nav>
 
-<div class="container">
 
-	<table class="table table-bordered table-hover">
-		<thead> 
-			<tr>
-			<td>Accommodation ID</td>
-			<td>Accommodation Type</td>
-			<td>Price per Night (€)</td>
-			<td>Number of People</td>
-			<td>Address</td>
-			<td>Link</td>
-			<!--
-			<td>Number of Rooms</td>
-			<td>Number of Beds</td>
-			<td>Amenities</td>
-			<td>Number of Bathrooms</td>
-			-->
-			</tr>
-		</thead>
-		<tbody>
-		<?php 
-			$city = $_POST['city'];
-			$start_date = $_POST['datetimepicker6'];
-			$end_date = $_POST['datetimepicker7'];
-			$req = "SELECT A.accommodation_ID, A.type, O.price_per_night, O.offering_ID, A.num_of_people, D.street, D.district, D.city, D.country
-					FROM Accommodation A, Offering O, Address D
-					WHERE A.accommodation_ID = O.accommodation_ID AND A.accommodation_ID = D.accommodation_ID AND 
-							D.city = '$city' AND DATE('$start_date') > O.start_date AND DATE('$end_date') < O.end_date";
-							
-			$result = mysqli_query($db, $req);
-			if ( !$result || mysqli_num_rows($result) == 0) {
-				echo '<tr> NO RESULTS FOUND.</tr>';
-			}
-			else {
-				while ($tuple = mysqli_fetch_assoc($result)) {
-					echo "<tr>";
-					$id = $tuple['accommodation_ID'];
-					$type = $tuple['type'];
-					if ( $type === 0) {
-						$type2 = 'room';
-					}
-					else {
-						$type2 = 'house';
-					}
-					$offID = $tuple['offering_ID'];
-					$price = $tuple['price_per_night'];
-					$people = $tuple['num_of_people'];
-					$street = $tuple['street'];
-					$district = $tuple['district'];
-					$city = $tuple['city'];
-					$country = $tuple['country'];
-					echo "<td>$id</td>
-						  <td>$type2</td>
-						  <td>$price</td>
-						  <td>$people</td>
-						  <td>$street, $district, $city, $country</td>
-						  <td><a href=\"info.php?id=$offID\">Details</a></td>
-						  </tr>";
-				}
-			}
-					
-		?>
-		</tbody>
-	</table>
+<div class="container">
+	<?php
+		$id = $_GET['id'];
+		$req = "SELECT A.accommodation_ID, A.num_of_people, A.type, A.percentageRecommend, O.price_per_night, AH.name,
+				AH.surname, AH.email, AH.phone_number, H.avg_host_rank, D.street, D.district, D.city, D.country
+				FROM Accommodation A, Offering O, Account AH, Host H, Address D
+				WHERE A.accommodation_ID = O.accommodation_ID AND
+					  D.accommodation_ID = A.accommodation_ID AND
+					  O.account_ID = AH.account_ID AND
+					  H.account_ID = AH.account_ID AND
+					  O.offering_ID = '$id';";
+		$req2 = "SELECT M.amenity_name
+				 FROM Amenity M, Accommodation A, Contains C
+				 WHERE A.accommodation_ID = C.accommodation_ID AND
+					   A.amenity_ID = C.amenity_ID AND
+					   A.accommodation_ID = '$id';";
+		$result1 = mysqli_query($db, $req);
+		$result2 = mysqli_query($db, $req2);
+		
+		$tuple = mysqli_fetch_assoc($result1);
+		$a_id = $tuple['accommodation_ID'];
+		$type = $tuple['type'];
+		if ( $type === 0) {
+			$type2 = 'Room';
+		}
+		else {
+			$type2 = 'House';
+		}
+		$street = $tuple['street'];
+		$district = $tuple['district'];
+		$city = $tuple['city'];
+		$country = $tuple['country'];
+		$num_of_people = $tuple['num_of_people'];
+		$price_per_night = $tuple['price_per_night'];
+		$perc = $tuple['percentageRecommend'];
+		$hname = $tuple['name'];
+		$hsurname = $tuple['surname'];
+		$email = $tuple['email'];
+		$phone_number = $tuple['phone_number'];
+		$avg_host_rank = $tuple['avg_host_rank'];
+		
+		echo "<h4>The following are details on the offering: </h4>
+			  <p>Accommodation ID: $a_id </br>
+			  Type: $type2 </br>
+			  Address: $street, $district, $city, $country </br>
+			  Number of people it can accommodate: $num_of_people </br>
+			  Price per night: $price_per_night </br>
+			  Recommendation percentage: $perc </p>
+			  <h4> Contact information: </h4>
+			  <p> Host name: $hname $hsurname </br>
+			  Email: $email </br>
+			  Phone number: $phone_number </br>
+			  Host's rank: $avg_host_rank </p>";
+	?>
 	
+	<h4> Do you want to book this place? </h4>
+	<div class = "row">
+    <div class="container col-md-1">
+        <button class="btn btn-primary center-block" onclick="window.location.href = 'signup.php' ">Request Reservation</button>
+    </div>
+	</div>
 </div>
 
-<!-- Latest compiled and minified JavaScript -->
+
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
