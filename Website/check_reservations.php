@@ -6,14 +6,13 @@
 	// $accountID = $_SESSION['user'];	UNCOMMENT THIS LINE AND COMMENT THE ONE BELOW WHEN MERGED WITH INDEX.PHP
 	$accountID = 1;
 
-	// check validity of the credentials
+	// check validity of the credentials & print welcome message at the right-upper corner
 	$sql = 'SELECT email FROM Account WHERE account_ID = ' .$accountID. ';';
 	$result = mysqli_query($db, $sql);
-	$row = mysqli_fetch_array($result);
-	$count = mysqli_num_rows($result);
-	if( $count != 1)
+    $row = mysqli_fetch_array($result);
+	if( $result->num_rows < 1)
 	{
-		$message = "Invalid account credentials. Please check your username/password!";
+		$message = "Invalid account credentials. Please check your email/password!";
 		echo "<script type='text/javascript'>";
 		echo "alert('" . $message. "');";
 		echo 'window.location.href="login.php";';		
@@ -54,16 +53,16 @@
 		{
 			echo "<tr>";
 			echo "<td align = 'center' style='padding: 10px'>".
-					"<a href='offerings.php?offering_ID=". $req[offering_ID] ."'>". $req[offering_ID] . "</a></td>";
+					"<a href='offerings.php?offering_ID=". $req['offering_ID'] ."'>". $req['offering_ID'] . "</a></td>";
 			echo "<td align = 'center' style='padding: 10px'>".
-					"<a href='account.php?account_ID=".$req[account_ID]. "'>" .$req[name]. " " .$req[surname]. "</a></td>";
-			echo "<td align = 'center' style='padding: 10px'>". date("d/m/Y", strtotime($req[reserve_start])) . "</td>";
-			echo "<td align = 'center' style='padding: 10px'>". date("d/m/Y", strtotime($req[reserve_end])) . "</td>";
+					"<a href='account.php?account_ID=".$req['account_ID']. "'>" .$req['name']. " " .$req['surname']. "</a></td>";
+			echo "<td align = 'center' style='padding: 10px'>". date("d/m/Y", strtotime($req['reserve_start'])) . "</td>";
+			echo "<td align = 'center' style='padding: 10px'>". date("d/m/Y", strtotime($req['reserve_end'])) . "</td>";
 			echo "<td align = 'center' style='padding: 10px'>".
 					"<form action='decide_reservation.php' method='post' align='center'>".
-						"<button type='submit' name='accepted' value='" .$req[offering_ID]. " " .$req[reservation_ID]. " 1'> Accept </button>".
+						"<button type='submit' name='accepted' value='" .$req['offering_ID']. " " .$req['reservation_ID']. " 1'> Accept </button>".
 						"&ensp;".
-						"<button type='submit' name='accepted' value='" .$req[offering_ID]. " " .$req[reservation_ID]. " 0'> Reject </button>".
+						"<button type='submit' name='accepted' value='" .$req['offering_ID']. " " .$req['reservation_ID']. " 0'> Reject </button>".
 					"</form></td>";				
 			echo "</tr>";
 		}

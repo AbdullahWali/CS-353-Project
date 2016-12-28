@@ -19,7 +19,7 @@ public class TableCreator
 	{
 		String url = "jdbc:mysql://localhost/cs353_database";
 		String username = "root";
-		String password = "root";
+		String password = "";
 
 		System.out.println("Connecting to the database...");
 
@@ -242,7 +242,6 @@ public class TableCreator
 		    		"accommodation_ID INT NOT NULL," +
 		    		"start_date DATE," +
 		    		"end_date DATE," +
-		    		"total_num_of_people INT," +
 		    		"price_per_night INT," +
 		    		"FOREIGN KEY (account_ID) REFERENCES Account(account_ID)," +
 		    		"FOREIGN KEY (accommodation_ID) REFERENCES Accommodation(accommodation_ID)" +
@@ -274,7 +273,7 @@ public class TableCreator
 		    
 		    // Create `Decides` table
 		    sql = "CREATE TABLE `Decides`(" +
-		    		"reservation_ID INT ," +
+		    		"reservation_ID INT PRIMARY KEY," +
 		    		"account_ID INT," +
 		    		"STATUS boolean," +
 		    		"FOREIGN KEY (reservation_ID) REFERENCES Reservation(reservation_ID)," +
