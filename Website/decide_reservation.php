@@ -2,7 +2,13 @@
 	
 	include_once 'dbconnect.php';
 
-	// $accountID = $_SESSION['user'];	UNCOMMENT THIS LINE AND COMMENT THE ONE BELOW WHEN MERGED WITH INDEX.PHP
+	// UNCOMMENT THE BELOWS AND DELETE LINE 12 WHEN MERGED WITH INDEX.PHP
+//	if ( !isset($_SESSION['user']))
+//	{
+//		header("Location: login.php");
+//		die;
+//	}
+//	$accountID = $_SESSION['user'];
 	$accountID = 1;
 	
 	$isAccepted = $_POST["accepted"];

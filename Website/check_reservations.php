@@ -6,14 +6,13 @@
 	// $accountID = $_SESSION['user'];	UNCOMMENT THIS LINE AND COMMENT THE ONE BELOW WHEN MERGED WITH INDEX.PHP
 	$accountID = 1;
 
-	// check validity of the credentials
+	// check validity of the credentials & print welcome message at the right-upper corner
 	$sql = 'SELECT email FROM Account WHERE account_ID = ' .$accountID. ';';
 	$result = mysqli_query($db, $sql);
     $row = mysqli_fetch_array($result);
-	$count = mysqli_num_rows($result);
-	if( $count != 1)
+	if( $result->num_rows < 1)
 	{
-		$message = "Invalid account credentials. Please check your username/password!";
+		$message = "Invalid account credentials. Please check your email/password!";
 		echo "<script type='text/javascript'>";
 		echo "alert('" . $message. "');";
 		echo 'window.location.href="login.php";';		

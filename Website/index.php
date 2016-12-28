@@ -1,7 +1,30 @@
 <?php
-include_once 'dbconnect.php';
-session_start();
-ob_start();
+	include_once 'dbconnect.php';
+	session_start();
+	ob_start();
+
+	if ( !isset($_SESSION['user']))
+	{
+		header("Location: login.php");
+		die;
+	}
+	
+	// print welcome message at the right-upper corner
+	$accountID = $_SESSION['user'];
+	$sql = 'SELECT email FROM Account WHERE account_ID = ' .$accountID. ';';
+	$result = mysqli_query($db, $sql);
+    $row = mysqli_fetch_array($result);
+	if( $result->num_rows < 1)
+	{
+		echo $result->num_rows;
+		$message = "Invalid account credentials. Please check your email/password!";
+		echo "<script type='text/javascript'>";
+		echo "alert('" . $message. "');";
+		echo 'window.location.href="login.php";';		
+		echo "</script>";
+		die;
+	}
+	echo "<h5 align='right' style='padding-right: 10px'> Welcome " . $row['email'] . "</h4>";
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +69,7 @@ ob_start();
          <li><a href="#">About</a></li>
      </ul>
      <ul class="nav navbar-nav navbar-right">
-         <li  class="active" ><a href="login.php">Log in</a></li>
+         <li  class="active" ><a href="logout.php">Log out</a></li>
 
      </ul>
  </div>
