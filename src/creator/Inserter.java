@@ -17,7 +17,7 @@ public class Inserter
 	{
 		String url = "jdbc:mysql://localhost/cs353_database?useSSL=false";
 		String username = "root";
-		String password = "root";
+		String password = "";
 
 		System.out.println("Connecting to the database...");
 		
@@ -126,7 +126,19 @@ public class Inserter
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Accommodation` VALUES (9, 1, 1, 99.99);";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Accommodation` VALUES (10, 4, 1, 74.82);";
+			sql = "INSERT INTO `Accommodation` VALUES (10, 4, 0, 74.82);";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Accommodation` VALUES (11, 3, 1, 50.18);";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Accommodation` VALUES (12, 1, 1, 99.00);";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Accommodation` VALUES (13, 6, 0, 83.42);";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Accommodation` VALUES (14, 2, 1, 72.30);";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Accommodation` VALUES (15, 5, 0, 71.70);";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Accommodation` VALUES (16, 2, 1, 88.64);";
 			stmt.executeUpdate(sql);
 			
 			// To `Address`
@@ -150,28 +162,54 @@ public class Inserter
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Address` VALUES (10, '398. Street', 'Taksim', 'Istanbul', 'Turkey')";
 			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (11, '103. Street', 'West End', 'London', 'UK')";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (12, '30. Street', 'Westminster', 'London', 'UK')";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (13, '5. Avenue', 'Knightsbridge', 'London', 'UK')";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (14, '4. Avenue', 'Campo Marzio', 'Rome', 'Italy')";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (15, '21. Street', 'Campo Marzio', 'Rome', 'Italy')";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Address` VALUES (16, '1. Boullevard', 'Monti', 'Rome', 'Italy')";
+			stmt.executeUpdate(sql);
+			
 			
 			// To `Offering`
-			sql = "INSERT INTO `Offering` VALUES (1, 4, 6, '2016-12-22', '2016-12-25', 12, 30);";
+			sql = "INSERT INTO `Offering` VALUES (1, 4, 6, '2017-01-16', '2017-02-02', 30);";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Offering` VALUES (2, 5, 2, '2017-01-15', '2017-01-31', 3, 136);";
+			sql = "INSERT INTO `Offering` VALUES (2, 5, 2, '2017-01-15', '2017-01-31', 136);";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Offering` VALUES (3, 8, 5, '2016-10-01', '2016-12-01', 3, 67);";
+			sql = "INSERT INTO `Offering` VALUES (3, 8, 5, '2017-01-01', '2017-12-01', 67);";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Offering` VALUES (4, 1, 8, '2016-02-24', '2016-02-25', 4, 115);";
+			sql = "INSERT INTO `Offering` VALUES (4, 1, 8, '2017-03-24', '2017-04-25', 115);";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Offering` VALUES (5, 7, 4, '2016-09-17', '2016-10-26', 2, 236);";
+			sql = "INSERT INTO `Offering` VALUES (5, 7, 4, '2017-01-17', '2017-03-26', 236);";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Offering` VALUES (6, 6, 10, '2016-07-04', '2017-07-09', 4, 128);";
+			sql = "INSERT INTO `Offering` VALUES (6, 6, 10, '2017-01-04', '2017-01-10', 128);";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Offering` VALUES (7, 3, 1, '2017-11-28', '2017-12-13', 7, 652);";
+			sql = "INSERT INTO `Offering` VALUES (7, 3, 1, '2017-01-28', '2017-02-20', 652);";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Offering` VALUES (8, 2, 9, '2017-01-01', '2017-01-08', 1, 91);";
+			sql = "INSERT INTO `Offering` VALUES (8, 2, 9, '2017-01-01', '2017-01-10', 91);";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Offering` VALUES (9, 10, 7, '2017-05-14', '2017-08-29', 6, 589);";
+			sql = "INSERT INTO `Offering` VALUES (9, 10, 7, '2017-05-01', '2017-08-29', 589);";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Offering` VALUES (10, 3, 3, '2017-02-18', '2017-02-24', 10, 1399);";
+			sql = "INSERT INTO `Offering` VALUES (10, 3, 3, '2017-02-18', '2017-02-24', 1399);";
 			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Offering` VALUES (11, 3, 3, '2017-03-20', '2017-04-24', 1199);";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Offering` VALUES (12, 9, 11, '2017-07-18', '2017-12-14', 83);";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Offering` VALUES (13, 9, 11, '2017-01-18', '2017-04-15', 94);";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Offering` VALUES (14, 7, 12, '2017-01-30', '2017-09-19', 76);";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Offering` VALUES (15, 7, 13, '2017-01-18', '2018-02-24', 96);";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Offering` VALUES (16, 2, 9, '2017-01-01', '2017-02-24', 100);";
+			stmt.executeUpdate(sql);
+			
 
 			//To Reservation
 			sql = "INSERT INTO `Reservation` VALUES(1, '2016-10-10', '2016-10-12' );";

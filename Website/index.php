@@ -45,9 +45,8 @@
 	<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 
-    <title>CnC</title>
-    <!-- Latest compiled and minified CSS -->
-    
+	<title>CnC</title>
+
 </head>
 <body style="padding-top: 65px;">
    <!-- Fixed navbar -->
@@ -67,6 +66,7 @@
        <ul class="nav navbar-nav">
          <li><a href="index.php">Home</a></li>
          <li><a href="#">About</a></li>
+		 <li><a href="detailed_search.php">Detailed Search</a></li>
      </ul>
      <ul class="nav navbar-nav navbar-right">
          <li  class="active" ><a href="logout.php">Log out</a></li>
@@ -76,19 +76,13 @@
 </div>
 </nav>
 
-
-
 <div class="container">
-	<h3> Quick Search </h3>
-	<p> Select the city you want to go to: </p> 
-	
-	
-	<!-- CITY DROPDOWN -->
-	<div class="dropdown">
-		<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Available Cities
-		<span class="caret"></span></button>
-		<ul class="dropdown-menu">
-			
+<h3> Quick Search </h3>
+	<form action="search.php" method="post" role="form">
+	<div class="row">
+	<div class="form-group">
+		<label for="city">Select city:</label>
+		<select class="form-control" required id="city" name="city">
 			<?php
 			
 			$req = "SELECT city FROM Address";
@@ -98,60 +92,70 @@
 				$city[] = $tuple['city'];
 				
 			}
+			$city = array_unique($city);
 			sort($city);
 			foreach ($city as $value) {
-				echo "<li><a href=\"#\">$value</a></li>";
+				echo "<option>$value</option>";
 			}
 				
 			?>
-		</ul>
-		</br> </br>
+		</select>
 	</div>
-	
-	
-	
-    <div class='col-md-5'>
-        <div class="form-group">
-            <div class='input-group date' id='datetimepicker6'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class='col-md-5'>
-        <div class="form-group">
-            <div class='input-group date' id='datetimepicker7'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </div>
-    </div>
+	</div>
+
+    <div class="row">
+						
+		<div class='col-md-6'>
+			<label for="datetimepicker6">Arrival Date:</label>
+				<div class="form-group">
+					<div class='input-group date' id='datetimepicker6' name="datetimepicker6">
+						<input type='text' class="form-control" name="datetimepicker6"/>
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+						</div>
+					</div>
+				</div>
+							
+							<div class='col-md-6'>
+								<label for="datetimepicker7">Departure Date:</label>
+								<div class="form-group">
+									<div class='input-group date' id='datetimepicker7' name="datetimepicker7">
+										<input type='text' class="form-control" name="datetimepicker7"/>
+										<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+							
+							<script type="text/javascript">
+									$(function () {
+										$('#datetimepicker6').datetimepicker({
+											format: 'YYYY-MM-DD'
+										});
+										$('#datetimepicker7').datetimepicker({
+										
+											format: 'YYYY-MM-DD'
+
+										});
+										$("#datetimepicker6").on("dp.change", function (e) {
+											$('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+										});
+										$("#datetimepicker7").on("dp.change", function (e) {
+											$('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+										});
+									});
+							</script>			
+						</div>
+	<div class="form-group"> <!-- Submit button !-->
+		<button class="btn btn-primary " name="submit" type="submit">Search</button>
+	</div>
+
+	</form>
 </div>
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker6').datetimepicker();
-        $('#datetimepicker7').datetimepicker({
-            useCurrent: false //Important! See issue #1075
-        });
-        $("#datetimepicker6").on("dp.change", function (e) {
-            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-        });
-        $("#datetimepicker7").on("dp.change", function (e) {
-            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-        });
-    });
-</script>
 
 
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>
 <?php ob_end_flush(); ?>
