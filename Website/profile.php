@@ -3,16 +3,22 @@ include_once 'dbconnect.php';
 session_start();
 ob_start();
 
-if ( isset($_SESSION['user'])=="" ) {
-  header("Location: index.php");
-  exit;
+$logged_in = false;
+if ( isset($_SESSION['user'])!="" ) {
+  $logged_in = true;
 }
 
 //Get info
-$account_id = $_SESSION['user'];
+$account_id = $_REQUEST['account_id'];
 $res=mysqli_query($db, "SELECT * FROM Account WHERE account_ID = $account_id;");
 $row=mysqli_fetch_array($res);
 $name = "{$row['name']} {$row['surname']}";
+$email = "{$row['email']}";
+$phone = "{$row['phone_number']}";
+
+
+if( isset($_POST['submit']) ) { 
+}
 
 ?>
 
@@ -50,7 +56,18 @@ $name = "{$row['name']} {$row['surname']}";
          <li><a href="#">About</a></li>
      </ul>
      <ul class="nav navbar-nav navbar-right">
-         <li  class="active" ><a href="login.php">Log in</a></li>
+   	<?php
+	          		if ($logged_in) {
+          					$query = "SELECT *
+			  						  FROM Account 
+			  						  WHERE account_ID = {$_SESSION['user']};";
+			  				$result = mysqli_query($db , $query) or die("Could not execute query");
+		  					$row  = mysqli_fetch_array($result);
+		  					$logged_in_name = $row['name'];
+	          	?>
+	          			<li> <p class="navbar-text"> Logged in as <?php echo "$logged_in_name" ?>,  </p></li>
+	          			<li><a href="logout.php">Log out</a></li>
+	          	<?php } ?>
 
      </ul>
  </div>
@@ -58,22 +75,33 @@ $name = "{$row['name']} {$row['surname']}";
 </nav>
 
 <div class="container">
-  <?php echo "<h3>Hello $name,</h3>"; ?>
-
-  <div class="col-md-2">
-    <div class="thumbnail">
-      <div class="caption">
-        <p><strong>Info</strong></p>
-      </div>
-    </div>
-  </div>
+<div class="row">
+<div class= "col-md-3">
+<div class="thumbnail">
+<div style="text-align: center;vertical-align: middle;">
+	<?php echo "<h3>$name,</h3>"; ?>
+	<?php echo "<h4>$email</h4>"; ?>
+	<?php echo "<h4>$phone</h4>"; ?>
+</div>
+</div>
 </div>
 
+<div class = "col-md-8" style="margin-top:25px;">	
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
+    <div class="form-group">
+    	<textarea class="form-control" rows="3" required="true" name="comment" placeholder="Write your comment here"></textarea>
+    	<input type="hidden" name="account_id" id="account_ID" value=<?php echo "{$account_id}"?> />
+    </div>
+    <div class="form-group">
+    	<button style="float: right;" type="submit" class="btn btn-info" name="submit">Submit</button>
+    </div>
+    </form>
 
+</div>
+</div>
+
+<div class="row" style="margin-top: 10px;">
 <!--Guest Reviews-->
-
-
-
 <?php 
 $res = mysqli_query($db, "SELECT C2.name, C2.surname, ranks.review_ID, rating, `comment`, recommended, `date` FROM ACCOUNT C NATURAL JOIN Offering O NATURAL JOIN Accommodation A NATURAL JOIN accomrevs NATURAL JOIN REVIEW R  JOIN ranks NATURAL JOIN ACCOUNT C2 WHERE ranks.review_ID = R.review_ID AND C.account_ID = $account_id");
 echo '<div class = "container">
@@ -110,9 +138,11 @@ echo "</tr>";
 }
 echo "</tbody>
 </table>
-</div>";
+</div>";	
 ?>
+</div>	
 
+</div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
