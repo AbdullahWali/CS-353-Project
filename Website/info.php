@@ -69,7 +69,7 @@ ob_start();
 		$req2 = "SELECT M.amenity_name
 				 FROM Amenity M, Accommodation A, Contains C
 				 WHERE A.accommodation_ID = C.accommodation_ID AND
-					   A.amenity_ID = C.amenity_ID AND
+					   M.amenity_ID = C.amenity_ID AND
 					   A.accommodation_ID = '$id';";
 		$result1 = mysqli_query($db, $req);
 		$result2 = mysqli_query($db, $req2);
@@ -103,7 +103,13 @@ ob_start();
 			  Number of people it can accommodate: $num_of_people </br>
 			  Price per night: $price_per_night </br>
 			  Recommendation percentage: $perc </p>
-			  <h4> Contact information: </h4>
+			  <h4> Available amenities: </h4>";
+			  $str = "";
+		while($tuple2 = mysqli_fetch_assoc($result2)) {	
+			$str .= $tuple2['amenity_name'] . ", ";
+		}
+		echo substr($str, 0, -2);
+		echo  "<h4> Contact information: </h4>
 			  <p> Host name: $hname $hsurname </br>
 			  Email: $email </br>
 			  Phone number: $phone_number </br>
@@ -113,7 +119,7 @@ ob_start();
 	<h4> Do you want to book this place? </h4>
 	<div class = "row">
     <div class="container col-md-1">
-        <button class="btn btn-primary center-block" onclick="window.location.href = 'signup.php' ">Request Reservation</button>
+        <button class="btn btn-primary center-block" onclick="window.location.href = 'make_reservation.php?o_id=<?php echo $id ?>&city=<?php echo $city ?>'">Request Reservation</button>
     </div>
 	</div>
 </div>

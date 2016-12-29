@@ -47,9 +47,9 @@ public class Inserter
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Account` VALUES (7, 'Nihat', 'Ozkul', 'nihat@gmail.com', '+903125874566');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Account` VALUES (8, 'Burcin', 'Terzioglu', 'ozkul@gmail.com', '+903125874566');";
+			sql = "INSERT INTO `Account` VALUES (8, 'Burcin', 'Terzioglu', 'terzioglu@gmail.com', '+903125874566');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Account` VALUES (9, 'Ilker', 'Kaleli', 'ILKER@gmail.com', '+903125874566');";
+			sql = "INSERT INTO `Account` VALUES (9, 'Ilker', 'Kaleli', 'kaleli@gmail.com', '+903125874566');";
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Account` VALUES (10, 'Ercument', 'Cicek', 'cicek@bilkent.edu.tr', '+905354781100');";
 			stmt.executeUpdate(sql);
@@ -407,19 +407,19 @@ public class Inserter
             stmt.executeUpdate(sql);
 
 			//Add some reviews
-			sql  = "INSERT INTO `review` (`review_ID`, `rating`, `comment`, `recommended`, `date`) VALUES ('1', '4.2', 'wow cok iyi ', b'1', '2016-12-15');";
+			sql  = "INSERT INTO `Review` (`review_ID`, `rating`, `comment`, `recommended`, `date`) VALUES ('1', '4.2', 'wow cok iyi ', b'1', '2016-12-15');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `review` (`review_ID`, `rating`, `comment`, `recommended`, `date`) VALUES ('2', '5', 'vaay be cok guzel ev huydaa ', b'1', '2016-12-30');";
-			stmt.executeUpdate(sql);
-
-			sql = "INSERT INTO `ranks` (`review_ID`, `account_ID`) VALUES ('1', '6');";
-			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `ranks` (`review_ID`, `account_ID`) VALUES ('2', '3');";
+			sql = "INSERT INTO `Review` (`review_ID`, `rating`, `comment`, `recommended`, `date`) VALUES ('2', '5', 'vaay be cok guzel ev huydaa ', b'1', '2016-12-30');";
 			stmt.executeUpdate(sql);
 
-			sql ="INSERT INTO `accomrevs` (`review_ID`, `accommodation_ID`) VALUES ('1', '7');";
+			sql = "INSERT INTO `Ranks` (`review_ID`, `account_ID`) VALUES ('1', '6');";
 			stmt.executeUpdate(sql);
-			sql ="INSERT INTO `accomrevs` (`review_ID`, `accommodation_ID`) VALUES ('2', '7');";
+			sql = "INSERT INTO `Ranks` (`review_ID`, `account_ID`) VALUES ('2', '3');";
+			stmt.executeUpdate(sql);
+
+			sql ="INSERT INTO `AccomRevs` (`review_ID`, `accommodation_ID`) VALUES ('1', '7');";
+			stmt.executeUpdate(sql);
+			sql ="INSERT INTO `AccomRevs` (`review_ID`, `accommodation_ID`) VALUES ('2', '7');";
 			stmt.executeUpdate(sql);
 
 
