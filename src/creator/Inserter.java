@@ -17,7 +17,7 @@ public class Inserter
 	{
 		String url = "jdbc:mysql://localhost/cs353_database?useSSL=false";
 		String username = "root";
-		String password = "";
+		String password = "root";
 
 		System.out.println("Connecting to the database...");
 		
@@ -406,7 +406,24 @@ public class Inserter
             sql = "INSERT INTO `Contains` VALUES (2,16);";
             stmt.executeUpdate(sql);
 
-            System.out.println( "Insertions are completed sucessfully!");
+			//Add some reviews
+			sql  = "INSERT INTO `review` (`review_ID`, `rating`, `comment`, `recommended`, `date`) VALUES ('1', '4.2', 'wow cok iyi ', b'1', '2016-12-15');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `review` (`review_ID`, `rating`, `comment`, `recommended`, `date`) VALUES ('2', '5', 'vaay be cok guzel ev huydaa ', b'1', '2016-12-30');";
+			stmt.executeUpdate(sql);
+
+			sql = "INSERT INTO `ranks` (`review_ID`, `account_ID`) VALUES ('1', '6');";
+			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `ranks` (`review_ID`, `account_ID`) VALUES ('2', '3');";
+			stmt.executeUpdate(sql);
+
+			sql ="INSERT INTO `accomrevs` (`review_ID`, `accommodation_ID`) VALUES ('1', '7');";
+			stmt.executeUpdate(sql);
+			sql ="INSERT INTO `accomrevs` (`review_ID`, `accommodation_ID`) VALUES ('2', '7');";
+			stmt.executeUpdate(sql);
+
+
+			System.out.println( "Insertions are completed sucessfully!");
 			System.out.println( "\nÀ bientôt.."); // Bu ne demek yaa?
 			
 		} catch(SQLException e) {

@@ -1,7 +1,6 @@
 <?php
 include_once 'dbconnect.php';
 session_start();
-unset($_SESSION['user']);
 
 ob_start();
  // it will never let you open index(login) page if session is set
@@ -71,7 +70,7 @@ if (!$error) {
          <li><a href="#">About</a></li>
      </ul>
      <ul class="nav navbar-nav navbar-right">
-         <li  class="active" ><a href="#login.php">Log in</a></li>
+         <li  class="active" ><a href="login.php">Log in</a></li>
 
      </ul>
  </div>

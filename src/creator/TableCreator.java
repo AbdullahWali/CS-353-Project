@@ -19,7 +19,7 @@ public class TableCreator
 	{
 		String url = "jdbc:mysql://localhost/cs353_database";
 		String username = "root";
-		String password = "";
+		String password = "root";
 
 		System.out.println("Connecting to the database...");
 
@@ -356,6 +356,7 @@ public class TableCreator
 		    sql = "CREATE TABLE `Ranks`(" +
 		    		"review_ID INT PRIMARY KEY," +
 		    		"account_ID INT NOT NULL," +
+		    		"FOREIGN KEY (review_ID) REFERENCES Review(review_ID)," +
 		    		"FOREIGN KEY (account_ID) REFERENCES Account(account_ID)" +
 		    		") ENGINE = InnoDB;";
 		    stmt.executeUpdate(sql);
