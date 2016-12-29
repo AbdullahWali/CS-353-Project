@@ -47,9 +47,9 @@ public class Inserter
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Account` VALUES (7, 'Nihat', 'Ozkul', 'nihat@gmail.com', '+903125874566');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Account` VALUES (8, 'Burcin', 'Terzioglu', 'ozkul@gmail.com', '+903125874566');";
+			sql = "INSERT INTO `Account` VALUES (8, 'Burcin', 'Terzioglu', 'terzioglu@gmail.com', '+903125874566');";
 			stmt.executeUpdate(sql);
-			sql = "INSERT INTO `Account` VALUES (9, 'Ilker', 'Kaleli', 'ILKER@gmail.com', '+903125874566');";
+			sql = "INSERT INTO `Account` VALUES (9, 'Ilker', 'Kaleli', 'kaleli@gmail.com', '+903125874566');";
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Account` VALUES (10, 'Ercument', 'Cicek', 'cicek@bilkent.edu.tr', '+905354781100');";
 			stmt.executeUpdate(sql);
