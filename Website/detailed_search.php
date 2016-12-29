@@ -46,7 +46,7 @@ ob_start();
 
 <div class="container">
 <h3> Detailed Search </h3>
-	<form action="search.php" method="post" role="form">
+	<form action="search2.php" method="post" role="form">
 	
 	<!-- SELECT CITY -->
 	<div class="col-md-5">
@@ -148,37 +148,37 @@ ob_start();
 	<p><b>Select amenities:</b></p>
 	<div class="form-group"> 
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="wifi" value="wifi"> Wi-Fi
+		<input class="form-check-input" style="margin:10px;" type="checkbox" id="wifi" name="wifi"> Wi-Fi
 		</label>
 		<label class="form-check-inline check">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="ethernet" value="ethernet"> Ethernet
+		<input class="form-check-input" style="margin:10px;" type="checkbox" id="ethernet" name="ethernet"> Ethernet
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="tv" value="tv"> TV
+		<input class="form-check-input" style="margin:10px;" type="checkbox" id="tv" name="tv"> TV
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="cable" value="cable"> Cable TV
+		<input class="form-check-input" style="margin:10px;" type="checkbox" id="cable" name="cable"> Cable TV
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="kitchen" value="kitchen"> Kitchen
+		<input class="form-check-input" style="margin:10px;" type="checkbox" id="kitchen" name="kitchen"> Kitchen
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="washing" value="washing"> Washing Machine
+		<input class="form-check-input" style="margin:10px;" type="checkbox" id="washing" name="washing"> Washing Machine
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="dryer" value="dryer"> Dryer
+		<input class="form-check-input" style="margin:10px;" type="checkbox" id="dryer" name="dryer"> Dryer
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="bathtub" value="bathtub"> Bathtub
+		<input class="form-check-input" style="margin:10px;" type="checkbox" id="bathtub" name="bathtub"> Bathtub
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="hangers" value="hangers"> Hangers
+		<input class="form-check-input" style="margin:10px;" type="checkbox" id="hangers" name="hangers"> Hangers
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="iron" value="iron"> Iron
+		<input class="form-check-input" style="margin:10px;" type="checkbox" id="iron" name="iron"> Iron
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="parking" value="parking"> Free Parking
+		<input class="form-check-input" style="margin:10px;" type="checkbox" id="parking" name="parking"> Free Parking
 		</label>
 		
 	</div>
