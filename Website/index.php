@@ -24,7 +24,7 @@
 		echo "</script>";
 		die;
 	}
-	echo "<h5 align='right' style='padding-right: 10px'> Welcome " . $row['email'] . "</h4>";
+	echo "<h5 align='right' style='padding-right: 10px'><a href='account.php'> Welcome " . $row['email'] . "</a></h4>";
 ?>
 
 <!DOCTYPE html>
@@ -65,6 +65,7 @@
          <li><a href="index.php">Home</a></li>
          <li><a href="#">About</a></li>
 		 <li><a href="detailed_search.php">Detailed Search</a></li>
+		 <li><a href="add_accommodation.php">Offer Accommodation</a></li>
      </ul>
      <ul class="nav navbar-nav navbar-right">
          <li  class="active" ><a href="logout.php">Log out</a></li>
