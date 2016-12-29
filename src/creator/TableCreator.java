@@ -17,7 +17,7 @@ public class TableCreator
 
 	public static void main(String[] args)
 	{
-		String url = "jdbc:mysql://localhost/cs353_database";
+		String url = "jdbc:mysql://localhost/cs353_database?useSSL=false";
 		String username = "root";
 		String password = "root";
 
