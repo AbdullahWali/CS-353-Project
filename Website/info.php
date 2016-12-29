@@ -113,7 +113,7 @@ ob_start();
 	<h4> Do you want to book this place? </h4>
 	<div class = "row">
     <div class="container col-md-1">
-        <button class="btn btn-primary center-block" onclick="window.location.href = 'signup.php' ">Request Reservation</button>
+        <button class="btn btn-primary center-block" onclick="window.location.href = 'make_reservation.php?o_id=<?php echo $id ?>' ">Request Reservation</button>
     </div>
 	</div>
 </div>

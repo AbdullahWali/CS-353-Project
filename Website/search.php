@@ -81,7 +81,7 @@ ob_start();
 			$req = "SELECT A.accommodation_ID, A.type, O.price_per_night, O.offering_ID, A.num_of_people, D.street, D.district, D.city, D.country
 					FROM Accommodation A, Offering O, Address D
 					WHERE A.accommodation_ID = O.accommodation_ID AND A.accommodation_ID = D.accommodation_ID AND 
-							D.city = '$city' AND '$start_date' > O.start_date AND '$end_date' < O.end_date";
+							D.city = '$city' AND '$start_date' >= O.start_date AND '$end_date' <= O.end_date";
 							
 			$result = mysqli_query($db, $req);
 			if ( !$result || mysqli_num_rows($result) == 0) {

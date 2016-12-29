@@ -74,7 +74,9 @@ ob_start();
 			</tr>
 		</thead>
 		<tbody>
-		<?php 
+		<?php
+			session_start();
+
 			$city = $_POST['city'];
 			$district = $_POST['district-list'];
 			$start_date = $_POST['datetimepicker6'];
@@ -83,6 +85,10 @@ ob_start();
 			$minprice = $_POST['minprice'];
 			$maxprice = $_POST['maxprice'];
 			$amenity = [];
+
+			// in case of reservation, store dates
+			$_SESSION['start_date'] = $start_date;
+			$_SESSION['end_date'] = $end_date;
 			
 			if (isset($_POST['wifi'])){
 				$wifi = 1;
@@ -169,13 +175,19 @@ ob_start();
 				}
 			}
 			
+			if( $minprice == null)
+				$minprice = 0;
+			if( $maxprice == null)
+				$maxprice = 2147483647;
+
+			// ====>> I think $num_of_people should be == A.num_of_people; not < or <=.
 			$req = "SELECT A.accommodation_ID, A.type, O.price_per_night, O.offering_ID, A.num_of_people, D.street, D.district, D.city, D.country
 					FROM Accommodation A, Offering O, Address D
 					WHERE A.accommodation_ID = O.accommodation_ID AND A.accommodation_ID = D.accommodation_ID 
 							AND D.city = '$city' 
-							AND DATE('$start_date') > O.start_date AND DATE('$end_date') < O.end_date
+							AND DATE('$start_date') >= O.start_date AND DATE('$end_date') <= O.end_date
 							AND $minprice < O.price_per_night AND $maxprice > O.price_per_night 
-							AND $num_of_people < A.num_of_people 
+							AND $num_of_people <= A.num_of_people
 							AND D.district = '$district'";
 			for ( $m = 0; $m < sizeof($ainput); $m = $m + 1) {
 				$addition = "AND $ainput[$m] IN (SELECT amenity_ID
@@ -183,7 +195,7 @@ ob_start();
 												 WHERE C.accommodation_ID = A.accommodation_ID)";
 				$req = $req . $addition;
 			}	
-			//echo $req;
+			//echo $req ."<br>";
 			$result = mysqli_query($db, $req);
 			if ( !$result || mysqli_num_rows($result) == 0) {
 				echo '<tr> NO RESULTS FOUND.</tr>';
