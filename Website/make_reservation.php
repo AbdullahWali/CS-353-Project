@@ -40,14 +40,14 @@
 			$sql = "DELETE FROM `Reservation` WHERE reservation_ID = $reservation_ID;";
 			$result = $db->query($sql);
 			if( $result == true)
-				showMessage("2".$err_msg, null);
+				showMessage($err_msg, null);
 			else
 				showMessage( "ERROR: Couldn't add to Makes table. Even worse, couldn't delete the reservation that has just made!".
 							 " DB is screwed up!", null);
 		}
 	}
 	else
-		showMessage("1".$err_msg, null);	
+		showMessage($err_msg, null);	
 	
 	function showMessage( $message, $direction)
 	{
