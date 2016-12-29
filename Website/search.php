@@ -82,6 +82,10 @@ ob_start();
 					FROM Accommodation A, Offering O, Address D
 					WHERE A.accommodation_ID = O.accommodation_ID AND A.accommodation_ID = D.accommodation_ID AND 
 							D.city = '$city' AND '$start_date' >= O.start_date AND '$end_date' <= O.end_date";
+
+			// in case of reservation, store dates
+			$_SESSION['start_date'] = $start_date;
+			$_SESSION['end_date'] = $end_date;
 							
 			$result = mysqli_query($db, $req);
 			if ( !$result || mysqli_num_rows($result) == 0) {
