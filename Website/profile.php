@@ -155,7 +155,7 @@ if( isset($_POST['submit']) ) {
 <div class="row" style="margin-top: 10px;">
 <!--Guest Reviews-->
 <?php 
-$res = mysqli_query($db, "SELECT C2.name, C2.surname, ranks.review_ID, rating, `comment`, recommended, `date` FROM ACCOUNT C NATURAL JOIN Offering O NATURAL JOIN Accommodation A NATURAL JOIN accomrevs NATURAL JOIN REVIEW R  JOIN ranks NATURAL JOIN ACCOUNT C2 WHERE ranks.review_ID = R.review_ID AND C.account_ID = $account_id");
+$res = mysqli_query($db, "SELECT C2.account_ID, C2.name, C2.surname, ranks.review_ID, rating, `comment`, recommended, `date` FROM ACCOUNT C NATURAL JOIN Offering O NATURAL JOIN Accommodation A NATURAL JOIN accomrevs NATURAL JOIN REVIEW R  JOIN ranks NATURAL JOIN ACCOUNT C2 WHERE ranks.review_ID = R.review_ID AND C.account_ID = $account_id");
 echo '<div class = "container">
 <h4> Reviews from Guests </h4>
 <table class="table">
@@ -175,7 +175,7 @@ echo '<div class = "container">
 while($row = mysqli_fetch_array($res))
 {
 echo "<tr>";
-echo "<td>" . $row['name'] . "</td>";
+echo "<td><a href=profile.php?account_id={$row['account_ID']}>" . $row['name'] . "</a></td>";
 echo "<td>" . $row['surname'] . "</td>";
 echo "<td>" . $row['rating'] . "</td>";
 echo "<td>" . $row['comment'] . "</td>";
@@ -215,7 +215,7 @@ echo '<div class = "container">
 while($row = mysqli_fetch_array($res))
 {
 echo "<tr>";
-echo "<td>" . $row['name'] . "</td>";
+echo "<td><a href=profile.php?account_id={$row['host_ID']}>" . $row['name'] . "</a></td>";
 echo "<td>" . $row['surname'] . "</td>";
 echo "<td>" . $row['rating'] . "</td>";
 echo "<td>" . $row['comment'] . "</td>";
