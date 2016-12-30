@@ -48,9 +48,12 @@ $phone = "{$row['phone_number']}";
 
      <div id="navbar" class="navbar-collapse collapse">
        <ul class="nav navbar-nav">
-         <li><a href="index.php">Home</a></li>
-         <li><a href="#">About</a></li>
-     </ul>
+          <li class><a href="index.php">Home</a></li>
+          <?php echo '<li class = "active"><a href="profile.php?account_id=' . $_SESSION['user']. '" > Profile Page </a> </li>';?>
+          <li><a href="detailed_search.php">Detailed Search</a></li>
+          <li><a href="add_accommodation.php">Offer Accommodation</a></li>
+          <li> <a href = "check_reservations.php"> Check Reservations </a></li> 
+      </ul>
      <ul class="nav navbar-nav navbar-right">
    	<?php
 	          		if ($logged_in) {

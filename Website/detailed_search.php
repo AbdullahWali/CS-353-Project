@@ -38,6 +38,13 @@
 	
 	<title>CnC</title>
 
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+	<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
 </head>
 <body style="padding-top: 65px;">
    <!-- Fixed navbar -->
@@ -55,14 +62,24 @@
 
      <div id="navbar" class="navbar-collapse collapse">
        <ul class="nav navbar-nav">
-         <li><a href="index.php">Home</a></li>
-         <li><a href="#">About</a></li>
-		 <li><a href="detailed_search.php">Detailed Search</a></li>
-		 <li><a href="add_accommodation.php">Offer Accommodation</a></li>
+          <li class><a href="index.php">Home</a></li>
+          <?php echo '<li><a href="profile.php?account_id=' . $_SESSION['user']. '" > Profile Page </a> </li>';?>
+          <li class = "active"><a href="detailed_search.php">Detailed Search</a></li>
+          <li><a href="add_accommodation.php">Offer Accommodation</a></li>
+          <li> <a href = "check_reservations.php"> Check Reservations </a></li> 
      </ul>
      <ul class="nav navbar-nav navbar-right">
-         <li  class="active" ><a href="logout.php">Log out</a></li>
-
+         <?php
+          					$query = "SELECT *
+			  						  FROM Account 
+			  						  WHERE account_ID = {$_SESSION['user']};";
+			  				$result = mysqli_query($db , $query) or die("Could not execute query");
+		  					$row  = mysqli_fetch_array($result);
+		  					$logged_in_name = $row['name'];
+	          	?>
+	          			<li> <p class="navbar-text"> Logged in as <?php echo "$logged_in_name" ?>,  </p></li>
+	          			<li><a href="logout.php">Log out</a></li>
+	          	
      </ul>
  </div>
 </div>
@@ -226,12 +243,7 @@
 	</form>
 </div>
 	
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-	<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
 		
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
