@@ -71,14 +71,15 @@
 
 <div class="container">
 <h3> Offer Accommodation </h3>
-	<form action="search2.php" method="post" role="form">
+	<form action="add_accomm_to_db.php" method="post" role="form">
 
 	<!-- ENTER ADDRESS -->
 	<div class="row">
 		<div class="col-md-10">
 			<div class="form-group">
-				<label for="city">Enter the Address:</label>
-				<textarea class="form-control" rows="4" id ="address" name="address" style="resize: none" required></textarea>
+				<label for="city">Address:</label>
+				<textarea class="form-control" rows="4" id ="address" name="address" placeholder="Enter the address of accommodation"
+					 style="resize: none" required></textarea>
 			</div>
 		</div>
 	</div>
@@ -87,8 +88,8 @@
 	<div class="row">
 		<div class="col-md-5">
 			<div class="form-group">
-				<label for="city">Select City:</label>
-				<input type="text" class="form-control" required id ="city" name="city" list="cityList">
+				<label for="city">City:</label>
+				<input type="text" class="form-control" id ="city" name="city" list="cityList" placeholder="Choose or enter a city" required>
 					<datalist id="cityList">
 						<option value="">Cities</option>
 						<?php
@@ -113,8 +114,9 @@
 		<!-- ENTER DISTRICT-->
 		<div class="col-md-5">
 			<div class="form-group">
-				<label for="city">Select District:</label>
-				<input type="text" class="form-control" required id="district-list" name="district-list" list="districtList">
+				<label for="city">District:</label>
+				<input type="text" class="form-control" id="district-list" name="district-list" list="districtList" 
+						placeholder="Choose or enter a district" required>
 					<datalist id="districtList">
 						<option value="">Districts</option>
 					</datalist>
@@ -128,8 +130,8 @@
 		<div class='col-md-5'>
 			<label for="datetimepicker6">Available From:</label>
 				<div class="form-group">
-					<div class='input-group date' required id='datetimepicker6' name="datetimepicker6">
-						<input type='text' class="form-control" name="datetimepicker6"/>
+					<div class='input-group date'  id='datetimepicker6' name="datetimepicker6">
+						<input type='text' class="form-control" name="datetimepicker6" required/>
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
@@ -141,7 +143,7 @@
 			<label for="datetimepicker7">Until:</label>
 			<div class="form-group">
 				<div class='input-group date' required id='datetimepicker7' name="datetimepicker7">
-					<input type='text' class="form-control" name="datetimepicker7"/>
+					<input type='text' class="form-control" name="datetimepicker7" required/>
 					<span class="input-group-addon">
 					<span class="glyphicon glyphicon-calendar"></span>
 					</span>
@@ -152,10 +154,11 @@
 
 	<!-- ENTER NUMBER OF PEOPLE -->				
 	<div class="row">
-		<div class="col-md-5">
-			<div class="form-group">
-				<label for="city">Select number of guests:</label>
-				<select class="form-control" id="num_of_people" name="num_of_people">
+		<div class="col-md-4">
+			<div class="form-group" required>
+				<label for="num_of_people">Maximum number of guests:</label>
+				<select class="form-control" id="num_of_people" name="num_of_people" required>
+					<option></option>
 					<option>1</option>
 					<option>2</option>
 					<option>3</option>
@@ -169,17 +172,25 @@
 				</select>
 			</div>
 		</div>
-		<!-- ENTER PRICE -->
-		<div class="col-md-2">
-			<div class="form-group">
-			<label for="minprice">Minimum Price:</label>
-			<input type="text" class="form-control" id="minprice" name="minprice">
-		  </div>
-		</div>
+	<!-- ENTER TYPE -->	
 		<div class="col-md-3">
-		<div class="form-group">
-			<label for="maxprice">Maximum Price:</label>
-			<input type="text" class="form-control" id="maxprice" name="maxprice">
+			<div class="form-group" required>
+				<label for="accom_type">Accommodation type:</label>
+				<select class="form-control" id="accom_type" name="accom_type" required>
+					<option></option>
+					<option value="0">House</option>
+					<option value="1">Room</option>
+				</select>
+			</div>
+		</div>
+		<!-- ENTER PRICE -->
+		<div class="col-md-3">
+			<div class="form-group">
+				<label for="price">Price:</label>
+				<div class="input-group">
+					<span class="input-group-addon">$</span>
+					<input type="text" class="form-control" id="price" name="price" placeholder="Enter price per night"required>
+				</div>
 		  </div>
 		</div>
 	</div>
@@ -188,37 +199,37 @@
 	<p><b>Select amenities:</b></p>
 	<div class="form-group"> 
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="wifi" name="wifi"> Wi-Fi
+			<input class="form-check-input" style="margin:10px;" type="checkbox" id="wifi" name="wifi"> Wi-Fi
 		</label>
 		<label class="form-check-inline check">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="ethernet" name="ethernet"> Ethernet
+			<input class="form-check-input" style="margin:10px;" type="checkbox" id="ethernet" name="ethernet"> Ethernet
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="tv" name="tv"> TV
+			<input class="form-check-input" style="margin:10px;" type="checkbox" id="tv" name="tv"> TV
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="cable" name="cable"> Cable TV
+			<input class="form-check-input" style="margin:10px;" type="checkbox" id="cable" name="cable"> Cable TV
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="kitchen" name="kitchen"> Kitchen
+			<input class="form-check-input" style="margin:10px;" type="checkbox" id="kitchen" name="kitchen"> Kitchen
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="washing" name="washing"> Washing Machine
+			<input class="form-check-input" style="margin:10px;" type="checkbox" id="washing" name="washing"> Washing Machine
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="dryer" name="dryer"> Dryer
+			<input class="form-check-input" style="margin:10px;" type="checkbox" id="dryer" name="dryer"> Dryer
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="bathtub" name="bathtub"> Bathtub
+			<input class="form-check-input" style="margin:10px;" type="checkbox" id="bathtub" name="bathtub"> Bathtub
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="hangers" name="hangers"> Hangers
+			<input class="form-check-input" style="margin:10px;" type="checkbox" id="hangers" name="hangers"> Hangers
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="iron" name="iron"> Iron
+			<input class="form-check-input" style="margin:10px;" type="checkbox" id="iron" name="iron"> Iron
 		</label>
 		<label class="form-check-inline">
-		<input class="form-check-input" style="margin:10px;" type="checkbox" id="parking" name="parking"> Free Parking
+			<input class="form-check-input" style="margin:10px;" type="checkbox" id="parking" name="parking"> Free Parking
 		</label>
 	</div>
 	
@@ -226,7 +237,7 @@
 	<div class="row">
 		<div class="col-md-5">
 			<div class="form-group">
-				<button class="btn btn-primary " name="submit" type="submit">Search</button>
+				<button class="btn btn-primary " name="submit" type="submit">Add offering</button>
 			</div>
 		</div>
 	</div>

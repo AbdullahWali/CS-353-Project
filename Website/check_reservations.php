@@ -3,8 +3,7 @@
 	include_once 'dbconnect.php';
 	session_start();
 	
-	// $accountID = $_SESSION['user'];	UNCOMMENT THIS LINE AND COMMENT THE ONE BELOW WHEN MERGED WITH INDEX.PHP
-	$accountID = 1;
+	$accountID = $_SESSION['user'];
 
 	// check validity of the credentials & print welcome message at the right-upper corner
 	$sql = 'SELECT email FROM Account WHERE account_ID = ' .$accountID. ';';

@@ -61,7 +61,7 @@ ob_start();
 			<tr>
 			<td>Accommodation ID</td>
 			<td>Accommodation Type</td>
-			<td>Price per Night (€)</td>
+			<td>Price per Night ($)</td>
 			<td>Number of People</td>
 			<td>Address</td>
 			<td>Link</td>
