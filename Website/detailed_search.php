@@ -230,12 +230,13 @@
 	<script type="text/javascript">
 									$(function () {
 										$('#datetimepicker6').datetimepicker({
-											format: 'YYYY-MM-DD'
+											format: 'YYYY-MM-DD',
+											useCurrent: false,
 										});
 										$('#datetimepicker7').datetimepicker({
 										
-											format: 'YYYY-MM-DD'
-
+											format: 'YYYY-MM-DD',
+											useCurrent: false,
 										});
 										$("#datetimepicker6").on("dp.change", function (e) {
 											$('#datetimepicker7').data("DateTimePicker").minDate(e.date);
