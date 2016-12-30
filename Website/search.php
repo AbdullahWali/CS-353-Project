@@ -97,10 +97,10 @@ ob_start();
 					$id = $tuple['accommodation_ID'];
 					$type = $tuple['type'];
 					if ( $type === 0) {
-						$type2 = 'room';
+						$type2 = 'House';
 					}
 					else {
-						$type2 = 'house';
+						$type2 = 'Room';
 					}
 					$offID = $tuple['offering_ID'];
 					$price = $tuple['price_per_night'];

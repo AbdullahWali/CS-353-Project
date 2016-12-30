@@ -75,7 +75,6 @@ ob_start();
 		</thead>
 		<tbody>
 		<?php
-			session_start();
 
 			$city = $_POST['city'];
 			$district = $_POST['district-list'];
@@ -84,8 +83,9 @@ ob_start();
 			$num_of_people = $_POST['num_of_people'];
 			$minprice = $_POST['minprice'];
 			$maxprice = $_POST['maxprice'];
+			$type = $_POST['type'];
 			$amenity = [];
-
+			
 			// in case of reservation, store dates
 			$_SESSION['start_date'] = $start_date;
 			$_SESSION['end_date'] = $end_date;
@@ -179,9 +179,33 @@ ob_start();
 				$minprice = 0;
 			if( $maxprice == null)
 				$maxprice = 2147483647;
-
-			// ====>> I think $num_of_people should be == A.num_of_people; not < or <=.
-			$req = "SELECT A.accommodation_ID, A.type, O.price_per_night, O.offering_ID, A.num_of_people, D.street, D.district, D.city, D.country
+			
+			if ($type == 'House') {
+				$type2 = 0;
+				$req = "SELECT A.accommodation_ID, A.type, O.price_per_night, O.offering_ID, A.num_of_people, D.street, D.district, D.city, D.country
+					FROM Accommodation A, Offering O, Address D
+					WHERE A.accommodation_ID = O.accommodation_ID AND A.accommodation_ID = D.accommodation_ID 
+							AND D.city = '$city' 
+							AND DATE('$start_date') >= O.start_date AND DATE('$end_date') <= O.end_date
+							AND $minprice < O.price_per_night AND $maxprice > O.price_per_night 
+							AND $num_of_people <= A.num_of_people
+							AND D.district = '$district'
+							AND A.type = $type2";
+			}
+			else if ($type == 'Room'){
+				$type2 = 1;
+				$req = "SELECT A.accommodation_ID, A.type, O.price_per_night, O.offering_ID, A.num_of_people, D.street, D.district, D.city, D.country
+					FROM Accommodation A, Offering O, Address D
+					WHERE A.accommodation_ID = O.accommodation_ID AND A.accommodation_ID = D.accommodation_ID 
+							AND D.city = '$city' 
+							AND DATE('$start_date') >= O.start_date AND DATE('$end_date') <= O.end_date
+							AND $minprice < O.price_per_night AND $maxprice > O.price_per_night 
+							AND $num_of_people <= A.num_of_people
+							AND D.district = '$district'
+							AND A.type = $type2";
+			}
+			else {
+				$req = "SELECT A.accommodation_ID, A.type, O.price_per_night, O.offering_ID, A.num_of_people, D.street, D.district, D.city, D.country
 					FROM Accommodation A, Offering O, Address D
 					WHERE A.accommodation_ID = O.accommodation_ID AND A.accommodation_ID = D.accommodation_ID 
 							AND D.city = '$city' 
@@ -189,6 +213,9 @@ ob_start();
 							AND $minprice < O.price_per_night AND $maxprice > O.price_per_night 
 							AND $num_of_people <= A.num_of_people
 							AND D.district = '$district'";
+			}
+			
+			
 			for ( $m = 0; $m < sizeof($ainput); $m = $m + 1) {
 				$addition = "AND $ainput[$m] IN (SELECT amenity_ID
 												 FROM Contains C
@@ -205,11 +232,11 @@ ob_start();
 					echo "<tr>";
 					$id = $tuple['accommodation_ID'];
 					$type = $tuple['type'];
-					if ( $type === 0) {
-						$type2 = 'room';
+					if ( $type == 0) {
+						$type2 = 'House';
 					}
 					else {
-						$type2 = 'house';
+						$type2 = 'Room';
 					}
 					$offID = $tuple['offering_ID'];
 					$price = $tuple['price_per_night'];

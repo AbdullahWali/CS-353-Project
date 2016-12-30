@@ -78,10 +78,10 @@ ob_start();
 		$a_id = $tuple['accommodation_ID'];
 		$type = $tuple['type'];
 		if ( $type === 0) {
-			$type2 = 'Room';
+			$type2 = 'House';
 		}
 		else {
-			$type2 = 'House';
+			$type2 = 'Room';
 		}
 		$street = $tuple['street'];
 		$district = $tuple['district'];
