@@ -31,7 +31,7 @@
 	}
 	
 	$accountID = $_SESSION['user'];
-	// pull all offerings of the account holder
+	// pull all requested reservations of the account holder
 	$sql = "SELECT A.accommodation_ID, A.type, O.price_per_night, O.offering_ID, A.num_of_people, D.street, D.district, D.city, D.country
 			FROM Accommodation A, Offering O, Address D
 			WHERE A.accommodation_ID = O.accommodation_ID AND A.accommodation_ID = D.accommodation_ID 
@@ -46,10 +46,10 @@
 	#echo "</br>";
 	#print_r($res_reqs);
 	if( count( $res_reqs) < 1)
-		echo "<h2 align='center'><b> You have no offered accommodations! </b></h2>";
+		echo "<h2 align='center'><b> You have not requested a reservation! </b></h2>";
 	else
 	{
-		echo "<h2 align='center'><b> Offered Accommodations </b></h2>";
+		echo "<h2 align='center'><b> Requested Reservations </b></h2>";
 		foreach($res_reqs as $tuple)
 		{
 			echo "<tr>";

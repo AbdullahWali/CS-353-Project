@@ -28,11 +28,11 @@ if( isset($_POST['btn-signup']) ) {
 			//sign up
 			$res = mysqli_query($db, "Insert INTO Account Values (DEFAULT, '$first_name' , '$last_name', '$email', '$phone_number' );");
 			$id = mysqli_insert_id($db);
-			echo "Insert INTO Credentials Values ($id, '$password' );";
+			#echo "Insert INTO Credentials Values ($id, '$password' );";
 			$res = mysqli_query($db, "Insert INTO Credentials Values ($id, '$password' );");
-			echo "$res";
+			#echo "$res";
 		} else {
-			$errMSG = "User Already Exists";
+			$errMSG = "Email already exists!";
 		}
 	}
 }
