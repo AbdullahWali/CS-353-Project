@@ -76,45 +76,47 @@
 </nav>
 
 <div class="container">
-<h3> Quick Search </h3>
-	<form action="search.php" method="post" role="form">
-	<div class="row">
-	<div class="form-group">
-		<label for="city">Select city:</label>
-		<select class="form-control" required id="city" name="city">
-			<?php
-			
-			$req = "SELECT city FROM Address";
-			$result = mysqli_query($db, $req);
-			$city = [];
-			while ($tuple = mysqli_fetch_assoc($result)) {
-				$city[] = $tuple['city'];
-				
-			}
-			$city = array_unique($city);
-			sort($city);
-			foreach ($city as $value) {
-				echo "<option>$value</option>";
-			}
-				
-			?>
-		</select>
-	</div>
-	</div>
 
-    <div class="row">
+<h3> Quick Search </h3>
+	
+	<form action="search.php" method="post" role="form">
+	<div class="row" >
+		<div class='col-md-12'>
+		<div class="form-group">
+			<label for="city">Select city:</label>
+			<select class="form-control" required id="city" name="city">
+				<?php
+			
+				$req = "SELECT city FROM Address";
+				$result = mysqli_query($db, $req);
+				$city = [];
+				while ($tuple = mysqli_fetch_assoc($result)) {
+					$city[] = $tuple['city'];
+				
+				}
+				$city = array_unique($city);
+				sort($city);
+				foreach ($city as $value) {
+					echo "<option>$value</option>";
+				}
+				
+				?>
+			</select>
+		</div></div>
+	</div>
 						
+    <div class="row">
 		<div class='col-md-6'>
-			<label for="datetimepicker6">Arrival Date:</label>
-				<div class="form-group">
-					<div class='input-group date' id='datetimepicker6' name="datetimepicker6">
-						<input type='text' class="form-control" name="datetimepicker6"/>
-							<span class="input-group-addon">
-								<span class="glyphicon glyphicon-calendar"></span>
+				<label for="datetimepicker6">Arrival Date:</label>
+					<div class="form-group">
+						<div class='input-group date' id='datetimepicker6' name="datetimepicker6">
+							<input type='text' class="form-control" name="datetimepicker6"/>
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
 								</span>
 						</div>
 					</div>
-				</div>
+		</div>
 							
 							<div class='col-md-6'>
 								<label for="datetimepicker7">Departure Date:</label>
