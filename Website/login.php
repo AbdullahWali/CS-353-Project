@@ -27,7 +27,7 @@ if (!$error) {
 
 	if( $count == 1 && $row['password']==$password ) {
         $_SESSION['user'] = $row['account_ID'];
-        header("Location: index.php");
+        header("Location: profile.php?account_id={$row['account_ID']}");
     } else {
         $errMSG = "Incorrect Credentials, Try again...";
     }

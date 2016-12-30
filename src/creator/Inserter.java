@@ -236,7 +236,7 @@ public class Inserter
             stmt.executeUpdate(sql);
             sql = "INSERT INTO `Makes` VALUES (1, 4, 3);";
             stmt.executeUpdate(sql);
-            sql = "INSERT INTO `Makes` VALUES (8, 5, 4);";
+            sql = "INSERT INTO `Makes` VALUES (8, 6, 9);";
             stmt.executeUpdate(sql);
             sql = "INSERT INTO `Makes` VALUES (3, 6, 8);";
             stmt.executeUpdate(sql);

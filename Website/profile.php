@@ -16,10 +16,6 @@ $name = "{$row['name']} {$row['surname']}";
 $email = "{$row['email']}";
 $phone = "{$row['phone_number']}";
 
-
-if( isset($_POST['submit']) ) { 
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -74,6 +70,7 @@ if( isset($_POST['submit']) ) {
 </div>
 </nav>
 
+<br>
 <div class="container">
 <div class="row">
 <div class= "col-md-3">
@@ -86,12 +83,53 @@ if( isset($_POST['submit']) ) {
 </div>
 </div>
 
+
+<?php   
+$res=mysqli_query($db, "SELECT
+  *
+FROM ACCOUNT
+  C1 NATURAL
+JOIN
+  offering
+JOIN
+  makes
+JOIN ACCOUNT
+  C2
+WHERE
+  offering.offering_ID = makes.offering_ID AND makes.account_ID = C2.account_ID and C1.account_ID <> C2.account_ID AND C1.account_ID = {$_SESSION['user']} AND C2.account_ID = {$account_id} ;");
+  $count = mysqli_num_rows($res);
+  $canRate = false;
+  if ($count > 0) {
+    $canRate = true;
+  }
+?>
+
+
 <div class = "col-md-8" style="margin-top:25px;">	
+    <h5> Rate as Host </h5>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
+
     <div class="form-group">
     	<textarea class="form-control" rows="3" required="true" name="comment" placeholder="Write your comment here"></textarea>
     	<input type="hidden" name="account_id" id="account_ID" value=<?php echo "{$account_id}"?> />
     </div>
+    <div class = "form-group">
+         <label for="over_five" class="col-xs-2 col-form-label">Rating</label>
+      <div class="col-xs-2">
+        <input class="form-control" type="number" value="2.5" max="5" min="1" name="over_five">
+      </div>
+      </div>
+
+     <?php
+        if ( !$canRate) {
+            ?>
+            <div class="form-group col-md-9">
+               <div class="alert alert-danger">
+                <span class="glyphicon glyphicon-info-sign"></span> You cannot rate this user, must be a host
+            </div>
+        </div>
+        <?php
+    }?>
     <div class="form-group">
     	<button style="float: right;" type="submit" class="btn btn-info" name="submit">Submit</button>
     </div>
@@ -100,12 +138,26 @@ if( isset($_POST['submit']) ) {
 </div>
 </div>
 
+
+<?php 
+if( isset($_POST['submit']) ) { 
+  if ($canRate) { 
+    $comment = $_POST['comment'];
+    $over_five = $_POST['over_five'];
+    $date = date("Y-m-d");
+    $res = mysqli_query($db, "INSERT INTO hostRevs VALUES ( {$_SESSION['user']} , $account_id, $over_five, '$comment', $date);");
+  }
+}
+
+
+?>
+
 <div class="row" style="margin-top: 10px;">
 <!--Guest Reviews-->
 <?php 
 $res = mysqli_query($db, "SELECT C2.name, C2.surname, ranks.review_ID, rating, `comment`, recommended, `date` FROM ACCOUNT C NATURAL JOIN Offering O NATURAL JOIN Accommodation A NATURAL JOIN accomrevs NATURAL JOIN REVIEW R  JOIN ranks NATURAL JOIN ACCOUNT C2 WHERE ranks.review_ID = R.review_ID AND C.account_ID = $account_id");
 echo '<div class = "container">
-<h4> Reviews from Hosts </h4>
+<h4> Reviews from Guests </h4>
 <table class="table">
 <thead>
 <tr>
@@ -141,6 +193,41 @@ echo "</tbody>
 </div>";	
 ?>
 </div>	
+
+
+<?php 
+$res = mysqli_query($db, "select * from Account  JOIN  hostRevs WHERE guest_ID =$account_id AND Account.account_ID = host_ID ");
+echo '<div class = "container">
+<h4> Reviews from Hosts </h4>
+<table class="table">
+<thead>
+<tr>
+<th>Firstname</th>
+<th>Lastname</th>
+<th> Rating </th>
+<th> Comment </th>
+<th> Date </th>
+</tr>
+</thead>
+<tbody>
+';
+
+while($row = mysqli_fetch_array($res))
+{
+echo "<tr>";
+echo "<td>" . $row['name'] . "</td>";
+echo "<td>" . $row['surname'] . "</td>";
+echo "<td>" . $row['rating'] . "</td>";
+echo "<td>" . $row['comment'] . "</td>";
+echo "<td>" . $row['date'] . "</td>";
+echo "</tr>";
+}
+echo "</tbody>
+</table>
+</div>";  
+?>
+</div>  
+
 
 </div>
 
