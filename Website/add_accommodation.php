@@ -24,7 +24,6 @@
 		echo "</script>";
 		die;
 	}
-	echo "<h5 align='right' style='padding-right: 10px'><a href='account.php'> Welcome " . $row['email'] . "</a></h4>";
 ?>
 
 <!DOCTYPE html>
