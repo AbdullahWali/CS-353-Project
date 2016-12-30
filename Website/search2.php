@@ -45,10 +45,21 @@ ob_start();
          <li><a href="index.php">Home</a></li>
          <li><a href="#">About</a></li>
 		 <li><a href="detailed_search.php">Detailed Search</a></li>
+		 <li><a href="add_accommodation.php">Offer Accommodation</a></li>
+		 <li> <a href = "check_reservations.php"> Check Reservations </a></li>
      </ul>
-     <ul class="nav navbar-nav navbar-right">
-         <li  class="active" ><a href="login.php">Log in</a></li>
-
+    <ul class="nav navbar-nav navbar-right">
+         <?php
+          					$query = "SELECT *
+			  						  FROM Account 
+			  						  WHERE account_ID = {$_SESSION['user']};";
+			  				$result = mysqli_query($db , $query) or die("Could not execute query");
+		  					$row  = mysqli_fetch_array($result);
+		  					$logged_in_name = $row['name'];
+	          	?>
+	          			<li> <p class="navbar-text"> Logged in as <?php echo "$logged_in_name" ?>,  </p></li>
+	          			<li><a href="logout.php">Log out</a></li>
+	          	
      </ul>
  </div>
 </div>

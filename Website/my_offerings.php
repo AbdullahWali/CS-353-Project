@@ -30,23 +30,7 @@
 		die;
 	}
 	
-	// print welcome message at the right-upper corner
 	$accountID = $_SESSION['user'];
-	$sql = 'SELECT email FROM Account WHERE account_ID = ' .$accountID. ';';
-	$result = mysqli_query($db, $sql);
-    $row = mysqli_fetch_array($result);
-	if( $result->num_rows < 1)
-	{
-		echo $result->num_rows;
-		$message = "Invalid account credentials. Please check your email/password!";
-		echo "<script type='text/javascript'>";
-		echo "alert('" . $message. "');";
-		echo 'window.location.href="login.php";';		
-		echo "</script>";
-		die;
-	}
-	echo "<h5 align='right' style='padding-right: 10px'><a href='account.php'> Welcome " . $row['email'] . "</a></h4>";
-
 	// pull all offerings of the account holder
 	$sql = "SELECT A.accommodation_ID, A.type, O.price_per_night, O.offering_ID, A.num_of_people, D.street, D.district, D.city, D.country
 			FROM Accommodation A, Offering O, Address D
@@ -119,7 +103,7 @@
 
 </head>
 <body style="padding-top: 65px;">
-   <!-- Fixed navbar -->
+      <!-- Fixed navbar -->
    <nav class="navbar navbar-inverse navbar-fixed-top">
        <div class="container">
          <div class="navbar-header">
@@ -134,15 +118,26 @@
 
      <div id="navbar" class="navbar-collapse collapse">
        <ul class="nav navbar-nav">
-         <li><a href="index.php">Home</a></li>
-         <li><a href="#">About</a></li>
-		 <li><a href="detailed_search.php">Detailed Search</a></li>
-		 <li><a href="add_accommodation.php">Offer Accommodation</a></li>
-     </ul>
-     <ul class="nav navbar-nav navbar-right">
-         <li  class="active" ><a href="logout.php">Log out</a></li>
-
-     </ul>
+          <li class><a href="index.php">Home</a></li>
+          <?php echo '<li class = "active"><a href="profile.php?account_id=' . $_SESSION['user']. '" > Profile Page </a> </li>';?>
+          <li><a href="detailed_search.php">Detailed Search</a></li>
+          <li><a href="add_accommodation.php">Offer Accommodation</a></li>
+          <li> <a href = "check_reservations.php"> Check Reservations </a></li>
+		  <li> <a href = "my_offerings.php"> My Offerings </a></li>
+      </ul>
+	 </ul>
+		 <ul class="nav navbar-nav navbar-right">
+         <?php
+          					$query = "SELECT *
+			  						  FROM Account 
+			  						  WHERE account_ID = {$_SESSION['user']};";
+			  				$result = mysqli_query($db , $query) or die("Could not execute query");
+		  					$row  = mysqli_fetch_array($result);
+		  					$logged_in_name = $row['name'];
+	          	?>
+	          			<li> <p class="navbar-text"> Logged in as <?php echo "$logged_in_name" ?>,  </p></li>
+	          			<li><a href="logout.php">Log out</a></li>
+	          			 </ul>
  </div>
 </div>
 </nav>

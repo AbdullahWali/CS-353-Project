@@ -51,9 +51,9 @@
 		{
 			echo "<tr>";
 			echo "<td align = 'center' style='padding: 10px'>".
-					"<a href='offerings.php?offering_ID=". $req['offering_ID'] ."'>". $req['offering_ID'] . "</a></td>";
+					"<a href='info.php?id=". $req['offering_ID'] ."'>". $req['offering_ID'] . "</a></td>";
 			echo "<td align = 'center' style='padding: 10px'>".
-					"<a href='account.php?account_ID=".$req['account_ID']. "'>" .$req['name']. " " .$req['surname']. "</a></td>";
+					"<a href='profile.php?account_id=".$req['account_ID']. "'>" .$req['name']. " " .$req['surname']. "</a></td>";
 			echo "<td align = 'center' style='padding: 10px'>". date("d/m/Y", strtotime($req['reserve_start'])) . "</td>";
 			echo "<td align = 'center' style='padding: 10px'>". date("d/m/Y", strtotime($req['reserve_end'])) . "</td>";
 			echo "<td align = 'center' style='padding: 10px'>".
