@@ -19,7 +19,7 @@
 		echo "</script>";
 		die;
 	}
-	echo "<h5 align='right' style='padding-right: 10px'> Welcome " . $row['email'] . "</h4>";
+	echo "<h5 align='right' style='padding-right: 10px'><a href='account.php'> Welcome " . $row['email'] . "</a></h4>";
 
 	// pull pending reservation requests for the account holder
 	$sql = "SELECT O.account_ID AS HostID, O.offering_ID, A.account_ID, A.name, A.surname, R.reservation_ID, R.reserve_start, R.reserve_end" .
@@ -102,6 +102,8 @@
 		   <ul class="nav navbar-nav">
 		     <li><a href="index.php">Home</a></li>
 		     <li><a href="#">About</a></li>
+			 <li><a href="detailed_search.php">Detailed Search</a></li>
+			 <li><a href="add_accommodation.php">Offer Accommodation</a></li>
 		 </ul>
 		 <ul class="nav navbar-nav navbar-right">
 		     <li  class="active" ><a href="logout.php">Log out</a></li>

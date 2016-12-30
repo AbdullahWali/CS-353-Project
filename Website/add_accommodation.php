@@ -72,104 +72,119 @@
 <div class="container">
 <h3> Offer Accommodation </h3>
 	<form action="search2.php" method="post" role="form">
+
+	<!-- ENTER ADDRESS -->
+	<div class="row">
+		<div class="col-md-10">
+			<div class="form-group">
+				<label for="city">Enter the Address:</label>
+				<textarea class="form-control" rows="4" id ="address" name="address" style="resize: none" required></textarea>
+			</div>
+		</div>
+	</div>
 	
-	<!-- SELECT CITY -->
-	<div class="col-md-5">
-	<div class="form-group">
-		<label for="city">Select city:</label>
-		<select class="form-control" required id="city" name="city">
-			<option value="">Cities</option>
-			<?php
+	<!-- ENTER CITY -->
+	<div class="row">
+		<div class="col-md-5">
+			<div class="form-group">
+				<label for="city">Select City:</label>
+				<input type="text" class="form-control" required id ="city" name="city" list="cityList">
+					<datalist id="cityList">
+						<option value="">Cities</option>
+						<?php
 			
-			$req = "SELECT city FROM Address";
-			$result = mysqli_query($db, $req);
-			$city = [];
-			while ($tuple = mysqli_fetch_assoc($result)) {
-				$city[] = $tuple['city'];
+						$req = "SELECT city FROM Address;";
+						$result = mysqli_query($db, $req);
+						$city = [];
+						while ($tuple = mysqli_fetch_assoc($result)) {
+							$city[] = $tuple['city'];
 				
-			}
-			$city = array_unique($city);
-			sort($city);
-			foreach ($city as $value) {
-				echo "<option value=\"$value\">$value</option>";
-			}
+						}
+						$city = array_unique($city);
+						sort($city);
+						foreach ($city as $value) {
+							echo "<option value=\"$value\">$value</option>";
+						}
 				
-			?>
-		</select>
-	</div>
-	</div>
-	
-	<!-- SELECT DISTRICT-->
-	<div class="col-md-5">
-	<div class="form-group">
-		<label for="city">Select district:</label>
-		<select class="form-control" required id="district-list" name="district-list">
-			<option value="">Districts</option>
-		</select>
-	</div>
+						?>
+					</datalist>
+			</div>
+		</div>
+		<!-- ENTER DISTRICT-->
+		<div class="col-md-5">
+			<div class="form-group">
+				<label for="city">Select District:</label>
+				<input type="text" class="form-control" required id="district-list" name="district-list" list="districtList">
+					<datalist id="districtList">
+						<option value="">Districts</option>
+					</datalist>
+				</select>
+			</div>
+		</div>
 	</div>
 
-	<!-- CALENDAR DATE PICKER-->					
+	<!-- CALENDAR DATE PICKER-->	
+	<div class="row">				
 		<div class='col-md-5'>
-			<label for="datetimepicker6">Arrival Date:</label>
+			<label for="datetimepicker6">Available From:</label>
 				<div class="form-group">
 					<div class='input-group date' required id='datetimepicker6' name="datetimepicker6">
 						<input type='text' class="form-control" name="datetimepicker6"/>
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
-								</span>
-						</div>
+							</span>
 					</div>
 				</div>
+		</div>
 							
-							<div class='col-md-5'>
-								<label for="datetimepicker7">Departure Date:</label>
-								<div class="form-group">
-									<div class='input-group date' required id='datetimepicker7' name="datetimepicker7">
-										<input type='text' class="form-control" name="datetimepicker7"/>
-										<span class="input-group-addon">
-										<span class="glyphicon glyphicon-calendar"></span>
-										</span>
-									</div>
-								</div>
-							</div>
-							
-	<!-- CHOOSE NUMBER OF PEOPLE -->				
+		<div class='col-md-5'>
+			<label for="datetimepicker7">Until:</label>
+			<div class="form-group">
+				<div class='input-group date' required id='datetimepicker7' name="datetimepicker7">
+					<input type='text' class="form-control" name="datetimepicker7"/>
+					<span class="input-group-addon">
+					<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ENTER NUMBER OF PEOPLE -->				
 	<div class="row">
-	<div class="col-md-5">
-	<div class="form-group">
-		<label for="city">Select number of guests:</label>
-		<select class="form-control" id="num_of_people" name="num_of_people">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-			<option>6</option>
-			<option>7</option>
-			<option>8</option>
-			<option>9</option>
-			<option>10</option>
-		</select>
-	</div>
-	</div>
-	
-	<!-- PRICE CHOOSE -->
-	<div class="col-md-2">
+		<div class="col-md-5">
+			<div class="form-group">
+				<label for="city">Select number of guests:</label>
+				<select class="form-control" id="num_of_people" name="num_of_people">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+					<option>10</option>
+				</select>
+			</div>
+		</div>
+		<!-- ENTER PRICE -->
+		<div class="col-md-2">
+			<div class="form-group">
+			<label for="minprice">Minimum Price:</label>
+			<input type="text" class="form-control" id="minprice" name="minprice">
+		  </div>
+		</div>
+		<div class="col-md-3">
 		<div class="form-group">
-		<label for="minprice">Minimum Price:</label>
-		<input type="text" class="form-control" id="minprice" name="minprice">
-      </div>
-	</div>
-	<div class="col-md-3">
-	<div class="form-group">
-		<label for="maxprice">Maximum Price:</label>
-		<input type="text" class="form-control" id="maxprice" name="maxprice">
-      </div>
-	</div>
+			<label for="maxprice">Maximum Price:</label>
+			<input type="text" class="form-control" id="maxprice" name="maxprice">
+		  </div>
+		</div>
 	</div>
 	
-	<!-- CHOOSE AMENITY -->
+	<!-- CHOOSE AMENITIES -->
 	<p><b>Select amenities:</b></p>
 	<div class="form-group"> 
 		<label class="form-check-inline">
@@ -205,15 +220,15 @@
 		<label class="form-check-inline">
 		<input class="form-check-input" style="margin:10px;" type="checkbox" id="parking" name="parking"> Free Parking
 		</label>
-		
 	</div>
 	
-	
-	
-	<div class="col-md-5">
-	<div class="form-group"> <!-- Submit button !-->
-		<button class="btn btn-primary " name="submit" type="submit">Search</button>
-	</div>
+	<!-- SUBMIT BUTTON -->
+	<div class="row">
+		<div class="col-md-5">
+			<div class="form-group">
+				<button class="btn btn-primary " name="submit" type="submit">Search</button>
+			</div>
+		</div>
 	</div>
 	</form>
 </div>
@@ -230,12 +245,13 @@
 	<script type="text/javascript">
 									$(function () {
 										$('#datetimepicker6').datetimepicker({
-											format: 'YYYY-MM-DD'
+											format: 'YYYY-MM-DD',
+											useCurrent: false,
 										});
 										$('#datetimepicker7').datetimepicker({
 										
-											format: 'YYYY-MM-DD'
-
+											format: 'YYYY-MM-DD',
+											useCurrent: false,
 										});
 										$("#datetimepicker6").on("dp.change", function (e) {
 											$('#datetimepicker7').data("DateTimePicker").minDate(e.date);
@@ -256,12 +272,12 @@
 						url:"getcities.php",
 						data:'city='+city,
 						success:function(data) {
-							$('#district-list').html(data);
+							$('#districtList').html(data);
 						}	
 					});
 				}
 				else {
-					$('#district-list').html('<option value="">ERROR</option>');
+					$('#district-list').html('<option value="">');
 				}
 			});	
 		});
