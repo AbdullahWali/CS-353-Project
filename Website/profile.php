@@ -64,7 +64,7 @@ $phone = "{$row['phone_number']}";
 		  					$row  = mysqli_fetch_array($result);
 		  					$logged_in_name = $row['name'];
 	          	?>
-	          			<li> <p class="navbar-text"> Logged in as <?php echo "$logged_in_name" ?>,  </p></li>
+	          			<li> <a href="change_password.php"> Change Password </a></li>
 	          			<li><a href="logout.php">Log out</a></li>
 	          	<?php } ?>
 
@@ -107,7 +107,7 @@ WHERE
   }
 ?>
 
-
+<?php if ($canRate) { ?>
 <div class = "col-md-8" style="margin-top:25px;">	
     <h5> Rate as Host </h5>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
@@ -123,22 +123,14 @@ WHERE
       </div>
       </div>
 
-     <?php
-        if ( !$canRate) {
-            ?>
-            <div class="form-group col-md-9">
-               <div class="alert alert-danger">
-                <span class="glyphicon glyphicon-info-sign"></span> You cannot rate this user, must be a host
-            </div>
-        </div>
-        <?php
-    }?>
     <div class="form-group">
     	<button style="float: right;" type="submit" class="btn btn-info" name="submit">Submit</button>
     </div>
     </form>
 
 </div>
+
+<?php } ?> 
 </div>
 
 
