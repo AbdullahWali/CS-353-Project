@@ -9,21 +9,6 @@
 		die;
 	}
 	
-	// print welcome message at the right-upper corner
-	$accountID = $_SESSION['user'];
-	$sql = 'SELECT email FROM Account WHERE account_ID = ' .$accountID. ';';
-	$result = mysqli_query($db, $sql);
-    $row = mysqli_fetch_array($result);
-	if( $result->num_rows < 1)
-	{
-		echo $result->num_rows;
-		$message = "Invalid account credentials. Please check your email/password!";
-		echo "<script type='text/javascript'>";
-		echo "alert('" . $message. "');";
-		echo 'window.location.href="login.php";';		
-		echo "</script>";
-		die;
-	}
 ?>
 
 <!DOCTYPE html>

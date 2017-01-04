@@ -195,7 +195,6 @@ public class TableCreator
 		    		"email VARCHAR(32) UNIQUE NOT NULL," +
 		    		"phone_number CHAR(15)" +
 		    		") ENGINE = InnoDB;";
-		    System.out.println( sql);
 		    stmt.executeUpdate(sql);
 		    System.out.println( "Table `Account` is created.");
 		    

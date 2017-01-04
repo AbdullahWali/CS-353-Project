@@ -93,6 +93,8 @@ public class Inserter
 			stmt.executeUpdate(sql);
 			sql = "INSERT INTO `Host` VALUES (8, 2.89);";
 			stmt.executeUpdate(sql);
+			sql = "INSERT INTO `Host` VALUES (9, 4.89);";
+			stmt.executeUpdate(sql);
 			
 			
 			// To `Guest`

@@ -3,13 +3,14 @@
 	<table class="table table-bordered table-hover">
 		<thead> 
 			<tr>
-			<td>Accommodation ID</td>
-			<td>Accommodation Type</td>
-			<td>Price per Night ($)</td>
-			<td>Number of People</td>
-			<td>Address</td>
-			<td>Link</td>
-			<td>Wanna delete?</td>
+			<td><b>Accommodation ID</b></td>
+			<td><b>Accommodation Type</b></td>
+			<td><b>Price per Night ($)</b></td>
+			<td><b>Number of People</b></td>
+			<td><b>Address</b></td>
+			<td><b>Availability</b></td>
+			<td><b>Link</b></td>
+			<td><b>Wanna delete?</b></td>
 			<!--
 			<td>Number of Rooms</td>
 			<td>Number of Beds</td>
@@ -33,7 +34,8 @@
 	
 	$accountID = $_SESSION['user'];
 	// pull all offerings of the account holder
-	$sql = "SELECT A.accommodation_ID, A.type, O.price_per_night, O.offering_ID, A.num_of_people, D.street, D.district, D.city, D.country
+	$sql = "SELECT A.accommodation_ID, A.type, O.price_per_night, O.offering_ID, O.start_date, O.end_date, A.num_of_people, D.street,
+					D.district, D.city, D.country
 			FROM Accommodation A, Offering O, Address D
 			WHERE A.accommodation_ID = O.accommodation_ID AND A.accommodation_ID = D.accommodation_ID 
 					AND O.account_ID = $accountID;";
@@ -69,11 +71,14 @@
 			$district = $tuple['district'];
 			$city = $tuple['city'];
 			$country = $tuple['country'];
+			$start_date = $tuple['start_date'];
+			$end_date = $tuple['end_date'];
 			echo "<td>$id</td>
 				  <td>$type2</td>
 				  <td>$price</td>
 				  <td>$people</td>
 				  <td>$street, $district, $city, $country</td>
+				  <td>$start_date </br> $end_date</td>
 				  <td><a href=\"info.php?id=$offID\">Details</a></td>
 				  <td><a href=\"delete_accom.php?a_id=$id\">Delete!</a></td>
 				  </tr>";

@@ -16,13 +16,20 @@ if( isset($_POST['btn-login']) ) {
 
 	  // if there's no error, continue to login
 
-    $res=mysqli_query($db, "SELECT * FROM Account natural join Credentials WHERE account_ID=$account_id");
+    $res=mysqli_query($db, "SELECT * FROM Account natural join Credentials WHERE account_ID=$account_id ;");
     $row=mysqli_fetch_array($res);
 	$count = mysqli_num_rows($res); // if uname/pass correct it returns must be 1 row
 
 	if( $count == 1 && $row['password']==$oldPassword ) {
-	$res=mysqli_query($db, "UPDATE Credentials SET password = $password WHERE account_ID = $account_id ");
-       header("Location: profile.php?account_id=$account_id");
+		$res=mysqli_query($db, "UPDATE Credentials SET password = '$password' WHERE account_ID = $account_id ;");
+		if( $res)
+		{
+			echo "<script type='text/javascript'>";
+			echo "alert('Password successfully changed!');";
+			echo 'window.location.href="profile.php?account_id='.$account_id.'";';
+			echo "</script>";
+			die;
+		}
 	} else {
         echo "<script> alert('Wrong Password Entered') </script>";
     }
@@ -56,7 +63,7 @@ if( isset($_POST['btn-login']) ) {
             <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
                 <div class="form-group">
                     <label class="sr-only" for="oldPassword">old Password</label>
-                    <input type="password" class="form-control" name = "oldPassword" id="oldPassword" placeholder="old Password" required="true">
+                    <input type="password" class="form-control" name = "oldPassword" id="oldPassword" placeholder="Old Password" required="true">
                 </div>
                 <div class="form-group">
                     <label class="sr-only" for="password">Password</label>

@@ -69,8 +69,8 @@ ob_start();
 <div class="container">
 	<?php
 		$id = $_GET['id'];
-		$req = "SELECT A.accommodation_ID, A.num_of_people, A.type, A.percentageRecommend, O.price_per_night, AH.name,
-				AH.surname, AH.email, AH.phone_number, H.avg_host_rank, D.street, D.district, D.city, D.country
+		$req = "SELECT A.accommodation_ID, A.num_of_people, A.type, A.percentageRecommend, O.price_per_night, O.start_date, O.end_date,
+				AH.name, AH.surname, AH.email, AH.phone_number, H.avg_host_rank, D.street, D.district, D.city, D.country
 				FROM Accommodation A, Offering O, Account AH, Host H, Address D
 				WHERE A.accommodation_ID = O.accommodation_ID AND
 					  D.accommodation_ID = A.accommodation_ID AND
@@ -94,6 +94,9 @@ ob_start();
 		else {
 			$type2 = 'Room';
 		}
+
+		$start_date = $tuple['start_date'];
+		$end_date = $tuple['end_date'];
 		$street = $tuple['street'];
 		$district = $tuple['district'];
 		$city = $tuple['city'];
@@ -113,7 +116,8 @@ ob_start();
 			  Address: $street, $district, $city, $country </br>
 			  Number of people it can accommodate: $num_of_people </br>
 			  Price per night: $price_per_night </br>
-			  Recommendation percentage: $perc </p>
+			  Recommendation percentage: $perc </br>
+			  Available from: $start_date &ensp; until: $end_date </p>
 			  <h4> Available amenities: </h4>";
 			  $str = "";
 		while($tuple2 = mysqli_fetch_assoc($result2)) {	

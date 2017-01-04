@@ -139,7 +139,14 @@
 				$sql = "INSERT INTO `Offering` VALUES(NULL, $account_id, $accom_id, '$start_date', '$end_date', $price);";
 				$result = $db->query($sql);
 				if( $result == true)
-					showMessage( $success_msg, "my_offerings.php");
+				{
+					$sql = "INSERT INTO `Host` VALUES($account_id, NULL);";
+					$result = $db->query($sql);
+					if( $result)
+						showMessage( $success_msg, "my_offerings.php");
+					else
+						showMessage( "Error occured while adding to the `Host`. DB is screwed up!", "add_accommodation.php");					
+				}
 				else
 					showMessage( "Error occured while adding the offering. DB is screwed up!", "add_accommodation.php");
 			}
