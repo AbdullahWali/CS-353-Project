@@ -76,15 +76,15 @@ ob_start();
 					  D.accommodation_ID = A.accommodation_ID AND
 					  O.account_ID = AH.account_ID AND
 					  H.account_ID = AH.account_ID AND
-					  O.offering_ID = '$id';";
+					  O.offering_ID = $id;";
+		#echo $req;
 		$req2 = "SELECT M.amenity_name
 				 FROM Amenity M, Accommodation A, Contains C
 				 WHERE A.accommodation_ID = C.accommodation_ID AND
 					   M.amenity_ID = C.amenity_ID AND
-					   A.accommodation_ID = '$id';";
+					   A.accommodation_ID = $id;";
 		$result1 = mysqli_query($db, $req);
 		$result2 = mysqli_query($db, $req2);
-		
 		$tuple = mysqli_fetch_assoc($result1);
 		$a_id = $tuple['accommodation_ID'];
 		$type = $tuple['type'];

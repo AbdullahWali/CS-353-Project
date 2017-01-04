@@ -50,10 +50,10 @@ $phone = "{$row['phone_number']}";
        <ul class="nav navbar-nav">
           <li class><a href="index.php">Home</a></li>
           <?php echo '<li class = "active"><a href="profile.php?account_id=' . $_SESSION['user']. '" > Profile Page </a> </li>';?>
-          <li><a href="detailed_search.php">Detailed Search</a></li>
           <li><a href="add_accommodation.php">Offer Accommodation</a></li>
           <li> <a href = "check_reservations.php"> Check Reservations </a></li>
 		  <li> <a href = "my_offerings.php"> My Offerings </a></li>
+		  <li> <a href = "my_reservations.php"> My Reservations </a></li>
       </ul>
      <ul class="nav navbar-nav navbar-right">
    	<?php

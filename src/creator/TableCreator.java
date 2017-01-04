@@ -192,9 +192,10 @@ public class TableCreator
 		    		"account_ID INT AUTO_INCREMENT PRIMARY KEY," +
 		    		"name VARCHAR(32)," +
 		    		"surname VARCHAR(32)," +
-		    		"email VARCHAR(32) UNIQUE NOT NULL," +
+		    		"email VARCHAR(32) LIKE '%_@_%_.__%' UNIQUE NOT NULL," +
 		    		"phone_number CHAR(15)" +
 		    		") ENGINE = InnoDB;";
+		    System.out.println( sql);
 		    stmt.executeUpdate(sql);
 		    System.out.println( "Table `Account` is created.");
 		    

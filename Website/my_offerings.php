@@ -9,6 +9,7 @@
 			<td>Number of People</td>
 			<td>Address</td>
 			<td>Link</td>
+			<td>Wanna delete?</td>
 			<!--
 			<td>Number of Rooms</td>
 			<td>Number of Beds</td>
@@ -74,6 +75,7 @@
 				  <td>$people</td>
 				  <td>$street, $district, $city, $country</td>
 				  <td><a href=\"info.php?id=$offID\">Details</a></td>
+				  <td><a href=\"delete_accom.php?a_id=$id\">Delete!</a></td>
 				  </tr>";
 		}
 	}

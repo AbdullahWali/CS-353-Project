@@ -33,9 +33,8 @@
 	$accountID = $_SESSION['user'];
 	// pull all requested reservations of the account holder
 	$sql = "SELECT A.accommodation_ID, A.type, O.price_per_night, O.offering_ID, A.num_of_people, D.street, D.district, D.city, D.country
-			FROM Accommodation A, Offering O, Address D
-			WHERE A.accommodation_ID = O.accommodation_ID AND A.accommodation_ID = D.accommodation_ID 
-					AND O.account_ID = $accountID;";
+			FROM Accommodation A, Offering O, Address D, Makes M, Reservation R
+			WHERE M.reservation_ID = R.reservation_ID AND M.account_ID = $accountID AND M.offering_ID = O.Offering_ID AND A.accommodation_ID = O.accommodation_ID AND A.accommodation_ID = D.accommodation_ID;";
 	#echo $sql;
 	$result = mysqli_query($db, $sql);
 	$res_reqs = array();
